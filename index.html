@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Srijani & Aritra | Subho Vivah — The Royal Wedding Invitation 💍</title>
+  <meta name="description" content="You are cordially invited to celebrate the auspicious Subho Vivah (Wedding Ceremony) of Srijani & Aritra on Saturday, December 12, 2026. Join us for a joyous celebration of love, sacred traditions, and royal feasts!">
+  
+  <!-- OpenGraph / WhatsApp / Facebook Preview Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Srijani & Aritra | Subho Vivah Invitation 🌸💍">
+  <meta property="og:description" content="With joy in our hearts, we invite you to celebrate the Grand Wedding Ceremony of Srijani & Aritra on Saturday, December 12, 2026.">
+  <meta property="og:image" content="images/together1.jpg">
+  <meta name="theme-color" content="#8B0000">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Srijani & Aritra | Subho Vivah Invitation 🌸💍">
+  <meta name="twitter:description" content="Saturday, Dec 12, 2026 • The Auspicious Royal Wedding Celebration.">
+  <meta name="twitter:image" content="images/together1.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌸</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Great+Vibes&family=Marcellus&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Rozha+One&display=swap" rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css?v=2.5">
+</head>
+<body>
+
+  <!-- Floating Audio & Particle Controls -->
+  <div class="floating-controls" id="floatingControls">
+    <button class="control-btn music-btn" id="musicToggleBtn" title="Toggle Wedding Shehnai & Melody" aria-label="Toggle Background Music">
+      <span class="btn-icon">🎵</span>
+      <span class="music-wave">
+        <span></span><span></span><span></span><span></span>
+      </span>
+    </button>
+    <button class="control-btn petal-btn" id="petalToggleBtn" title="Toggle Petals Shower" aria-label="Toggle Petal Shower">
+      <span class="btn-icon">🌸</span>
+    </button>
+  </div>
+
+  <!-- Background Falling Petals Canvas -->
+  <canvas id="petalsCanvas" class="petals-canvas"></canvas>
+
+  <!-- Confetti Canvas -->
+  <canvas id="confettiCanvas" class="confetti-canvas"></canvas>
+
+  <!-- Interactive Click Sparkles Container -->
+  <div id="sparkleContainer" class="sparkle-container"></div>
+
+
+  <!-- ==============================================
+       INTERACTIVE AVATAR GATEWAY OPENING STAGE
+       (User clicks Bride or Groom to unite them!)
+       ============================================== -->
+  <div class="avatar-unveil-overlay" id="unveilOverlay">
+    <!-- Velvet Silk Curtains -->
+    <div class="curtain curtain-left" id="curtainLeft">
+      <div class="curtain-fabric"></div>
+      <div class="curtain-tassel"></div>
+    </div>
+    <div class="curtain curtain-right" id="curtainRight">
+      <div class="curtain-fabric"></div>
+      <div class="curtain-tassel"></div>
+    </div>
+
+    <!-- Center Interactive Stage Content -->
+    <div class="avatar-unveil-container" id="unveilContainer">
+      
+      <!-- Top Auspicious Inscription -->
+      <div class="unveil-header animate-header">
+        <div class="shubho-symbol">॥ শুভ বিবাহ ॥</div>
+        <div class="sanskrit-mantra">॥ ॐ श्री गणेशায় नमः ॥</div>
+        <h1 class="unveil-title">Srijani <span>&</span> Aritra</h1>
+        <p class="unveil-tagline">Two Hearts • Endless Smiles • One Sacred Promise</p>
+        
+        <!-- Interactive Direction Pill -->
+        <div class="unveil-instruction-badge" id="instructionBadge">
+          <span class="badge-sparkle">✨</span>
+          <span class="instruction-text">Tap either <strong>Bride</strong> or <strong>Groom</strong> to bring them together & unveil the invitation!</span>
+          <span class="badge-sparkle">✨</span>
+        </div>
+      </div>
+
+      <!-- Interactive Avatars Stage Arena -->
+      <div class="avatar-stage" id="avatarStage">
+        
+        <!-- GROOM AVATAR CARD (Left) -->
+        <div class="avatar-character-card groom-character" id="groomChar" role="button" tabindex="0" aria-label="Tap Aritra to walk to Srijani">
+          <div class="avatar-bubble" id="groomBubble">
+            <span>Take me to my Bride! 💖</span>
+          </div>
+          <div class="avatar-circle-wrapper">
+            <div class="avatar-halo-ring"></div>
+            <div class="avatar-pulse-circle"></div>
+            <div class="avatar-img-frame">
+              <img src="images/groom.jpg" alt="Aritra (The Groom)" class="avatar-img" onerror="this.onerror=null;this.src='../marriage_card_page/assets/images/groom.jpg';">
+              <div class="avatar-role-icon" title="Groom">🤵</div>
+            </div>
+            <div class="avatar-click-ripple"></div>
+          </div>
+          <div class="avatar-meta">
+            <span class="avatar-title-badge">THE GROOM</span>
+            <span class="avatar-name">Aritra</span>
+            <span class="avatar-action-pill">👉 Tap to Meet Bride 💖</span>
+          </div>
+        </div>
+
+        <!-- CONNECTING SACRED FLORAL PATH / MANDAP ALTAR -->
+        <div class="stage-path" id="stagePath">
+          <div class="path-decorative-track">
+            <span class="path-flower-dot">🌸</span>
+            <span class="path-flower-dot">✨</span>
+            <span class="path-flower-dot">💖</span>
+            <span class="path-flower-dot">✨</span>
+            <span class="path-flower-dot">🌸</span>
+          </div>
+          
+          <div class="path-center-altar">
+            <div class="mandap-heart-glow">
+              <span class="mandap-rings">💍</span>
+              <span class="mandap-sub">#SRIARI</span>
+            </div>
+            <div class="mandap-altar-label">Sacred Mandap</div>
+          </div>
+
+          <!-- Dynamic Footsteps & Petal Trail Container -->
+          <div class="path-trail-container" id="pathTrailContainer"></div>
+        </div>
+
+        <!-- BRIDE AVATAR CARD (Right) -->
+        <div class="avatar-character-card bride-character" id="brideChar" role="button" tabindex="0" aria-label="Tap Srijani to walk to Aritra">
+          <div class="avatar-bubble" id="brideBubble">
+            <span>Take me to my Groom! 💕</span>
+          </div>
+          <div class="avatar-circle-wrapper">
+            <div class="avatar-halo-ring"></div>
+            <div class="avatar-pulse-circle"></div>
+            <div class="avatar-img-frame">
+              <img src="images/bride.jpg" alt="Srijani (The Bride)" class="avatar-img" onerror="this.onerror=null;this.src='../marriage_card_page/assets/images/bride.jpg';">
+              <div class="avatar-role-icon" title="Bride">👰</div>
+            </div>
+            <div class="avatar-click-ripple"></div>
+          </div>
+          <div class="avatar-meta">
+            <span class="avatar-title-badge">THE BRIDE</span>
+            <span class="avatar-name">Srijani</span>
+            <span class="avatar-action-pill">👈 Tap to Meet Groom 🌸</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- CELEBRATION UNION CARD (Appears when they meet!) -->
+      <div class="together-celebration-card" id="togetherCard">
+        <div class="celebration-garland">🌺 🌸 🌺</div>
+        <div class="celebration-rings">💍 💖 💍</div>
+        <h2 class="celebration-title">Subho Vivah!</h2>
+        <p class="celebration-subtitle">Two Souls United in Love & Destiny</p>
+        <p class="celebration-welcome">Welcome to Srijani & Aritra's Wedding Celebration ✨</p>
+      </div>
+
+      <!-- Bottom Hint & Quick Open Fallback -->
+      <div class="unveil-bottom-hint" id="unveilBottomHint">
+        <div class="scroll-mouse-icon">
+          <div class="mouse-wheel"></div>
+        </div>
+        <p class="hint-text">✨ Tap either avatar or scroll to open the invitation ✨</p>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ==============================================
+       MAIN INVITATION WEBPAGE (BRIDE'S SIDE)
+       ============================================== -->
+  <main class="page-container" id="mainContent">
+
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="hero">
+      <div class="hero-bg-overlay"></div>
+      <div class="hero-bokeh"></div>
+
+      <div class="hero-content">
+        <!-- Auspicious Bengali Calligraphy -->
+        <div class="traditional-symbol animate-fade-down">
+          <span class="om-swastik">॥ শ্রী শ্রী প্রজাপতয়ে নমঃ ॥</span>
+          <span class="subho-bibaho-badge">॥ শুভ বিবাহ ॥</span>
+        </div>
+
+        <div class="invitation-intro animate-fade-up delay-1">
+          <span class="golden-dash"></span>
+          <span class="intro-tag">CORDIALLY INVITED BY THE BRIDE'S FAMILY</span>
+          <span class="golden-dash"></span>
+        </div>
+
+        <h3 class="hero-subtitle animate-fade-up delay-2">
+          With immense joy and blessings of our elders, we invite you to the Subho Vivah of our beloved daughter
+        </h3>
+
+        <!-- Couple Names (Bride First) -->
+        <div class="couple-names-wrapper animate-zoom-in delay-3">
+          <h1 class="bride-name">Srijani</h1>
+          <div class="heart-connector">
+            <span class="heart-pulse">💍</span>
+            <span class="ampersand">weds</span>
+          </div>
+          <h1 class="groom-name">Aritra</h1>
+        </div>
+
+        <!-- Featured Couple Photo in Royal Bengali Filigree Frame -->
+        <div class="hero-couple-portrait-wrapper animate-fade-up delay-4">
+          <div class="portrait-filigree-frame">
+            <img src="images/together1.jpg" alt="Srijani & Aritra" class="hero-together-photo" onerror="this.onerror=null;this.src='images/together2.jpg';">
+            <div class="filigree-crown-top">👑</div>
+            <div class="filigree-badge-bottom">
+              <span>🌸 Forever Begins Here 🌸</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Date & Auspicious Time Pill -->
+        <div class="date-venue-pill animate-fade-up delay-5">
+          <div class="pill-item">
+            <span class="pill-icon">📅</span>
+            <span class="pill-text"><strong>Saturday, 12th December 2026</strong></span>
+          </div>
+          <div class="pill-divider"></div>
+          <div class="pill-item">
+            <span class="pill-icon">⏰</span>
+            <span class="pill-text"><strong>Auspicious Lagna: 7:00 PM Onwards</strong></span>
+          </div>
+          <div class="pill-divider"></div>
+          <div class="pill-item">
+            <span class="pill-icon">📍</span>
+            <span class="pill-text"><strong>Vidyasagar Community Hall (VCC 1), Kolkata</strong></span>
+          </div>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="hero-cta-group animate-fade-up delay-5">
+          <a href="#rituals" class="btn btn-gold">
+            <span class="btn-icon">🌸</span> View Wedding Rituals
+          </a>
+          <a href="#countdown" class="btn btn-outline">
+            <span class="btn-icon">📅</span> Save The Date
+          </a>
+          <a href="#blessings" class="btn btn-rose">
+            <span class="btn-icon">💌</span> Send Blessings
+          </a>
+        </div>
+
+        <!-- Scroll Indicator (Inside hero-content, nicely separated) -->
+        <a href="#couple" class="hero-scroll-indicator animate-fade-up delay-5" aria-label="Scroll to Meet Couple">
+          <span class="scroll-text">Explore Our Celebration</span>
+          <span class="arrow-bounce">↓</span>
+        </a>
+      </div>
+    </section>
+
+
+    <!-- ==============================================
+         MEET THE BRIDE & GROOM
+         ============================================== -->
+    <section class="section couple-section" id="couple">
+      <div class="section-container">
+        
+        <div class="section-header reveal">
+          <span class="section-badge">CELEBRATING SACRED UNION</span>
+          <h2 class="section-title">Meet Srijani & Aritra</h2>
+          <div class="title-ornament">⚜️ 🌸 ⚜️</div>
+          <p class="section-desc">
+            A celebration of two beautiful souls, shared laughter, cherished traditions, and the joy of two families coming together.
+          </p>
+        </div>
+
+        <!-- Side-by-Side Couple Showcase -->
+        <div class="couple-side-by-side-wrapper reveal">
+          
+          <!-- BRIDE CARD (Featured First) -->
+          <div class="couple-portrait-card bride-card">
+            <div class="card-ornament-corner top-left"></div>
+            <div class="card-ornament-corner top-right"></div>
+            
+            <div class="portrait-photo-frame">
+              <img src="images/bride.jpg" alt="Srijani (The Bride)" class="portrait-photo bride-photo" loading="eager" onerror="this.onerror=null;this.src='../marriage_card_page/assets/images/bride.jpg';">
+              <div class="portrait-role-badge bride-badge">
+                <span>👰</span> The Bride • শ্রীমতী সৃজনী
+              </div>
+            </div>
+            
+            <div class="portrait-details">
+              <span class="portrait-role-tag bride-tag">KANYA • THE BRIDE</span>
+              <h3 class="portrait-name">Srijani</h3>
+              <p class="portrait-bio">
+                Radiant, warm-hearted, and the heartbeat of her family. Her graceful smile, artistic spirit, and gentle charm illuminate every room and make Aritra’s world complete.
+              </p>
+              <div class="cute-tags">
+                <span class="cute-tag">🌸 Radiant Belle</span>
+                <span class="cute-tag">🎨 Creative Spirit</span>
+                <span class="cute-tag">✨ Sweetest Smile</span>
+                <span class="cute-tag">💖 Ready for Saat Paak</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CENTRAL WEDDING KNOT & AUSPICIOUS SYMBOLS -->
+          <div class="couple-center-divider">
+            <div class="center-heart-ring">
+              <span class="center-heart-icon">💞</span>
+            </div>
+            <div class="center-divider-line"></div>
+            <div class="center-bengali-symbol">॥ শুভদৃষ্টি ॥</div>
+            <div class="center-date-badge">12 • 12 • 2026</div>
+            <div class="center-divider-line"></div>
+            <p class="center-quote">
+              "When two souls are destined to meet, the universe writes the sweetest melody."
+            </p>
+          </div>
+
+          <!-- GROOM CARD -->
+          <div class="couple-portrait-card groom-card">
+            <div class="card-ornament-corner top-left"></div>
+            <div class="card-ornament-corner top-right"></div>
+            
+            <div class="portrait-photo-frame">
+              <img src="images/groom.jpg" alt="Aritra (The Groom)" class="portrait-photo groom-photo" loading="eager" onerror="this.onerror=null;this.src='../marriage_card_page/assets/images/groom.jpg';">
+              <div class="portrait-role-badge groom-badge">
+                <span>🤵</span> The Groom • শ্রীমান অরিত্র
+              </div>
+            </div>
+            
+            <div class="portrait-details">
+              <span class="portrait-role-tag groom-tag">BARA • THE GROOM</span>
+              <h3 class="portrait-name">Aritra</h3>
+              <p class="portrait-bio">
+                Thoughtful, full of warmth, and always ready with a bright smile. Tech enthusiast and devoted partner whose heart found its eternal sanctuary in Srijani.
+              </p>
+              <div class="cute-tags">
+                <span class="cute-tag">✨ Gentle Heart</span>
+                <span class="cute-tag">☕ Chai & Tech</span>
+                <span class="cute-tag">🤵 The Dapper Groom</span>
+                <span class="cute-tag">💖 Srijani's Biggest Fan</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==============================================
+         AUSPICIOUS WEDDING RITUALS TIMELINE
+         ============================================== -->
+    <section class="section rituals-section" id="rituals">
+      <div class="section-container">
+        
+        <div class="section-header reveal">
+          <span class="section-badge">SACRED TRADITIONS</span>
+          <h2 class="section-title">Auspicious Wedding Rituals</h2>
+          <div class="title-ornament">🪔 🌸 🪔</div>
+          <p class="section-desc">
+            Experience the divine beauty of our traditional Bengali wedding ceremonies as Srijani & Aritra unite through holy vows and rituals.
+          </p>
+        </div>
+
+        <div class="rituals-grid reveal">
+          
+          <!-- Ritual 1: Gaye Holud -->
+          <div class="ritual-card">
+            <div class="ritual-card-badge">MORNING RITUAL</div>
+            <div class="ritual-icon-box">🌼</div>
+            <h3 class="ritual-title">Gaye Holud</h3>
+            <span class="ritual-bengali-name">গায়ে হলুদ</span>
+            <p class="ritual-time">Morning • 10:30 AM</p>
+            <p class="ritual-desc">
+              The joyous ceremony of turmeric paste applied to the bride and groom, symbolizing purity, glowing blessings, sweets, and family songs.
+            </p>
+          </div>
+
+
+          <!-- Ritual 3: Saat Paak & Subho Drishti -->
+          <div class="ritual-card highlight-card">
+            <div class="highlight-ribbon">SACRED HIGHLIGHT</div>
+            <div class="ritual-icon-box">👰</div>
+            <h3 class="ritual-title">Saat Paak & Subho Drishti</h3>
+            <span class="ritual-bengali-name">সাত পাক ও শুভদৃষ্টি</span>
+            <p class="ritual-time">Auspicious Lagna • 7:45 PM</p>
+            <p class="ritual-desc">
+              The bride carried on a wooden Piri circles the groom 7 times, removing betel leaves for their first magical glance, followed by Mala Badal!
+            </p>
+          </div>
+
+          <!-- Ritual 4: Kanya Daan & Sindoor Daan -->
+          <div class="ritual-card">
+            <div class="ritual-card-badge">THE ETERNAL UNION</div>
+            <div class="ritual-icon-box">🔥</div>
+            <h3 class="ritual-title">Saat Padi & Sindoor Daan</h3>
+            <span class="ritual-bengali-name">সিঁদুরদান ও সপ্তপদী</span>
+            <p class="ritual-time">Night • 8:30 PM</p>
+            <p class="ritual-desc">
+              Sacred Vedic mantras around the holy Agni, taking seven eternal steps together, and the crowning moment of bright red vermilion!
+            </p>
+          </div>
+
+          <!-- Ritual 5: Preeti Bhoj -->
+          <div class="ritual-card">
+            <div class="ritual-card-badge">GRAND BANQUET</div>
+            <div class="ritual-icon-box">🍛</div>
+            <h3 class="ritual-title">Royal Wedding Feast</h3>
+            <span class="ritual-bengali-name">শুভ প্রীতিভোজ</span>
+            <p class="ritual-time">Dinner • 8:00 PM Onwards</p>
+            <p class="ritual-desc">
+              A lavish traditional Bengali feast prepared with pure love — fragrant Basanti Polao, savory fish delicacies, sweets, and desserts.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==============================================
+         CHERISHED MOMENTS / POLAROID PHOTO GALLERY
+         ============================================== -->
+    <section class="section moments-section" id="moments">
+      <div class="section-container">
+        
+        <div class="section-header reveal">
+          <span class="section-badge">GLIMPSES OF LOVE</span>
+          <h2 class="section-title">Cherished Moments of Us</h2>
+          <div class="title-ornament">📸 💖 📸</div>
+          <p class="section-desc">
+            Capturing the laughter, secret conversations, and unforgettable adventures leading up to our big day. Tap any photo to enlarge or leave a heart!
+          </p>
+        </div>
+
+        <div class="polaroid-grid reveal">
+          
+          <!-- Polaroid 1 -->
+          <div class="polaroid-card polaroid-tilt-1" data-fullimg="images/together2.jpg" data-caption="Soulful Smiles & Forever Promises 💕">
+            <div class="polaroid-inner">
+              <div class="polaroid-pin">📌</div>
+              <div class="polaroid-img-box">
+                <img src="images/together2.jpg" alt="Srijani & Aritra Together" loading="lazy">
+                <div class="polaroid-zoom-hint">🔍 Tap to Zoom</div>
+              </div>
+              <div class="polaroid-caption">
+                <p>Soulful Smiles & Forever Promises 💕</p>
+                <button class="love-reaction-btn" title="Send Love" aria-label="Send Love">
+                  ❤️ <span class="like-count">148</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Polaroid 2 -->
+          <div class="polaroid-card polaroid-tilt-2" data-fullimg="images/together3.jpg" data-caption="In Your Eyes, I Found My Home 🌸">
+            <div class="polaroid-inner">
+              <div class="polaroid-pin">📌</div>
+              <div class="polaroid-img-box">
+                <img src="images/together3.jpg" alt="Srijani & Aritra Smiles" loading="lazy">
+                <div class="polaroid-zoom-hint">🔍 Tap to Zoom</div>
+              </div>
+              <div class="polaroid-caption">
+                <p>In Your Eyes, I Found My Home 🌸</p>
+                <button class="love-reaction-btn" title="Send Love" aria-label="Send Love">
+                  💖 <span class="like-count">162</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Polaroid 3 -->
+          <div class="polaroid-card polaroid-tilt-3" data-fullimg="images/together4.jpg" data-caption="Hand in Hand, Ready for Saat Paak ✨">
+            <div class="polaroid-inner">
+              <div class="polaroid-pin">📌</div>
+              <div class="polaroid-img-box">
+                <img src="images/together4.jpg" alt="Srijani & Aritra Hand in Hand" loading="lazy">
+                <div class="polaroid-zoom-hint">🔍 Tap to Zoom</div>
+              </div>
+              <div class="polaroid-caption">
+                <p>Hand in Hand, Ready for Saat Paak ✨</p>
+                <button class="love-reaction-btn" title="Send Love" aria-label="Send Love">
+                  ✨ <span class="like-count">175</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Polaroid 4 -->
+          <div class="polaroid-card polaroid-tilt-4" data-fullimg="images/together5.jpg" data-caption="Two Hearts, One Eternal Rhythm 💍">
+            <div class="polaroid-inner">
+              <div class="polaroid-pin">📌</div>
+              <div class="polaroid-img-box">
+                <img src="images/together5.jpg" alt="Srijani & Aritra Romance" loading="lazy">
+                <div class="polaroid-zoom-hint">🔍 Tap to Zoom</div>
+              </div>
+              <div class="polaroid-caption">
+                <p>Two Hearts, One Eternal Rhythm 💍</p>
+                <button class="love-reaction-btn" title="Send Love" aria-label="Send Love">
+                  🌸 <span class="like-count">189</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==============================================
+         COUNTDOWN & SAVE THE DATE SECTION
+         ============================================== -->
+    <section class="section countdown-section" id="countdown">
+      <div class="section-container">
+        
+        <div class="countdown-card reveal">
+          <div class="card-sparkles"></div>
+
+          <span class="section-badge">MARK YOUR CALENDAR</span>
+          <h2 class="section-title text-gold">Counting Down To Subho Vivah</h2>
+          <p class="countdown-subtitle">Saturday, December 12, 2026 • Kolkata</p>
+
+          <!-- Live Timer Grid -->
+          <div class="timer-grid" id="timerGrid">
+            <div class="timer-box">
+              <div class="timer-circle">
+                <span class="timer-number" id="timerDays">00</span>
+              </div>
+              <span class="timer-label">DAYS</span>
+            </div>
+            <div class="timer-colon">:</div>
+            <div class="timer-box">
+              <div class="timer-circle">
+                <span class="timer-number" id="timerHours">00</span>
+              </div>
+              <span class="timer-label">HOURS</span>
+            </div>
+            <div class="timer-colon">:</div>
+            <div class="timer-box">
+              <div class="timer-circle">
+                <span class="timer-number" id="timerMinutes">00</span>
+              </div>
+              <span class="timer-label">MINUTES</span>
+            </div>
+            <div class="timer-colon">:</div>
+            <div class="timer-box">
+              <div class="timer-circle">
+                <span class="timer-number" id="timerSeconds">00</span>
+              </div>
+              <span class="timer-label">SECONDS</span>
+            </div>
+          </div>
+
+          <!-- Calendar Add Buttons -->
+          <div class="calendar-actions">
+            <button class="btn btn-calendar google-cal-btn" id="googleCalBtn">
+              <span class="btn-icon">📅</span> Add to Google Calendar
+            </button>
+            <button class="btn btn-calendar ical-btn" id="iCalBtn">
+              <span class="btn-icon">🍏</span> Apple / Outlook (.ics)
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==============================================
+         VENUE & LOCATION DETAILS
+         ============================================== -->
+    <section class="section venue-section" id="venue">
+      <div class="section-container">
+        
+        <div class="section-header reveal">
+          <span class="section-badge">HOW TO REACH</span>
+          <h2 class="section-title">Wedding Venue & Map</h2>
+          <div class="title-ornament">📍 🏛️ 📍</div>
+          <p class="section-desc">
+            We eagerly await your presence to grace this auspicious occasion and bless the couple!
+          </p>
+        </div>
+
+        <div class="venue-showcase-card reveal">
+          <div class="venue-image-wrapper">
+            <img src="images/together1.jpg" alt="Wedding Venue Atmosphere" class="venue-img">
+            <div class="venue-overlay-badge">
+              <span>🏛️ Wedding Ceremony Hall</span>
+            </div>
+          </div>
+
+          <div class="venue-details-content">
+            <div class="venue-badge-pill">SUBHO VIVAH VENUE</div>
+            <h3 class="venue-name" id="venueNameText">Vidyasagar Community Hall (VCC 1)</h3>
+            <p class="venue-address" id="venueAddressText">
+              <span>📍</span> Vidyasagar Community Hall (VCC 1), Ganguly Bagan, Kolkata, West Bengal
+            </p>
+
+            <div class="venue-perks">
+              <div class="perk-item">
+                <span class="perk-icon">🚗</span>
+                <div>
+                  <strong>Convenient Parking</strong>
+                  <p>Spacious, secure parking arrangements for family and guests.</p>
+                </div>
+              </div>
+              <div class="perk-item">
+                <span class="perk-icon">🚇</span>
+                <div>
+                  <strong>Easily Accessible</strong>
+                  <p>Conveniently reachable via Metro, cabs, and main arterial roadways.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="venue-actions">
+              <a href="https://maps.app.goo.gl/3b4yKrw2qBnKjf5R8" target="_blank" rel="noopener noreferrer" class="btn btn-gold btn-large" id="googleMapsBtn">
+                <span class="btn-icon">🗺️</span> Open In Google Maps
+              </a>
+              <button class="btn btn-outline" id="copyAddressBtn">
+                <span class="btn-icon">📋</span> Copy Address
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==============================================
+         INTERACTIVE BLESSINGS & RSVP GUESTBOOK
+         ============================================== -->
+    <section class="section blessings-section" id="blessings">
+      <div class="section-container">
+        
+        <div class="section-header reveal">
+          <span class="section-badge">SHOWER YOUR AASHIRWAD</span>
+          <h2 class="section-title">Send Your Blessings & RSVP</h2>
+          <div class="title-ornament">💌 🌸 💌</div>
+          <p class="section-desc">
+            Leave a loving message for Srijani & Aritra! Your heartfelt wishes will appear instantly on our celebration blessing board.
+          </p>
+        </div>
+
+        <div class="blessings-interactive-layout reveal">
+          
+          <!-- Blessing Form Card -->
+          <div class="blessing-form-card">
+            <h3 class="form-title">Write a Blessing / RSVP</h3>
+            <form id="blessingForm">
+              
+              <div class="form-group">
+                <label for="guestName">Your Name(s) *</label>
+                <input type="text" id="guestName" placeholder="e.g. Your Name" required maxlength="50">
+              </div>
+
+              <div class="form-group">
+                <label for="attendanceStatus">Will you join Srijani's wedding celebration? *</label>
+                <select id="attendanceStatus" required>
+                  <option value="🎉 Joyfully Attending with Family (Yes!)">🎉 Joyfully Attending with Family (Yes!)</option>
+                  <option value="🙋‍♀️ Attending Solo">🙋‍♀️ Attending Solo</option>
+                  <option value="💌 Sending Love & Blessings from Afar">💌 Sending Love from Afar</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Choose an Auspicious Wedding Sticker</label>
+                <div class="sticker-selector" id="stickerSelector">
+                  <button type="button" class="sticker-btn active" data-sticker="🌸 Subho Vivah!">🌸 Subho Vivah!</button>
+                  <button type="button" class="sticker-btn" data-sticker="💖 Loads of Love!">💖 Loads of Love!</button>
+                  <button type="button" class="sticker-btn" data-sticker="✨ Boundless Happiness!">✨ Boundless Joy!</button>
+                  <button type="button" class="sticker-btn" data-sticker="👰 Ready for Saat Paak!">👰 Team Bride!</button>
+                  <button type="button" class="sticker-btn" data-sticker="🍛 Excited for Wedding Feast!">🍛 Royal Feast!</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="blessingMessage">Your Message for Srijani & Aritra</label>
+                <textarea id="blessingMessage" rows="3" placeholder="May your married life be filled with everlasting joy, harmony, sweet laughter, and sacred blessings! ✨🌸" required maxlength="300"></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-gold btn-block" id="submitBlessingBtn">
+                <span class="btn-icon">🎉</span> Post Blessing & Trigger Confetti
+              </button>
+
+            </form>
+          </div>
+
+          <!-- Live Blessing Wall -->
+          <div class="blessing-wall-container">
+            <div class="wall-header">
+              <h3 class="wall-title">Celebration Blessing Board</h3>
+              <span class="wall-count" id="blessingCountBadge">Loading...</span>
+            </div>
+
+            <div class="blessing-cards-list" id="blessingCardsList">
+              <!-- Dynamically populated via JS -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==============================================
+         FOOTER & SHARE BAR
+         ============================================== -->
+    <footer class="footer-section">
+      <div class="footer-container">
+        
+        <div class="footer-monogram">
+          <span>S</span>
+          <span class="footer-heart">💖</span>
+          <span>A</span>
+        </div>
+
+        <!-- Dynamic Walking Couple in Footer -> Converts into #SRIARI at bottom of page -->
+        <div class="footer-couple-stage" id="footerCoupleStage">
+          <div class="footer-couple-walker footer-walker-srijani" id="footerSrijani">
+            <span class="walker-avatar">👰</span>
+            <span class="walker-name">Srijani</span>
+          </div>
+
+          <div class="footer-walker-heart" id="footerWalkerHeart">💖</div>
+
+          <div class="footer-couple-walker footer-walker-aritra" id="footerAritra">
+            <span class="walker-name">Aritra</span>
+            <span class="walker-avatar">🤵</span>
+          </div>
+
+          <div class="footer-couple-merged" id="footerMergedSriAri" title="Tap for celebration!">
+            <span class="merged-ring">💍</span>
+            <span class="merged-hashtag">#SRIARI</span>
+            <span class="merged-sparkle">✨</span>
+          </div>
+        </div>
+
+        <h3 class="footer-title">Srijani & Aritra</h3>
+        <p class="footer-bengali-title">॥ শ্রী শ্রী প্রজাপতয়ে নমঃ • শুভ বিবাহ ॥</p>
+        <p class="footer-date">Saturday, 12th December 2026 • Kolkata</p>
+        
+        <p class="footer-quote">
+          "Your loving presence and sacred aashirwad will make our wedding day truly blessed and unforgettable!"
+        </p>
+
+
+        <div class="footer-copy">
+          <p>Cordially Invited by the <strong>Family & Loved Ones of Srijani</strong> 🌸</p>
+          <p class="tiny-credit">Crafted with endless love for Srijani & Aritra's Wedding Ceremony</p>
+        </div>
+
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- ==============================================
+       IMAGE LIGHTBOX MODAL
+       ============================================== -->
+  <div class="lightbox-modal" id="lightboxModal">
+    <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+    <div class="lightbox-content">
+      <button class="lightbox-close-btn" id="lightboxCloseBtn" aria-label="Close photo preview">✕</button>
+      <img src="" alt="Full view" class="lightbox-img" id="lightboxImg">
+      <p class="lightbox-caption" id="lightboxCaption"></p>
+    </div>
+  </div>
+
+
+  <!-- Toast Notification -->
+  <div class="toast-notification" id="toastNotification">
+    <span class="toast-icon">✨</span>
+    <span class="toast-msg" id="toastMsg">Notification</span>
+  </div>
+
+  <!-- Main JavaScript File -->
+  <script src="app.js?v=2.5"></script>
+</body>
+</html>
