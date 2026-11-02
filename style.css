@@ -191,11 +191,13 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   z-index: 2000;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   background: radial-gradient(circle at center, #2E0509 0%, #170204 100%);
   transition: opacity 1.2s cubic-bezier(0.65, 0, 0.35, 1);
 }
@@ -253,6 +255,7 @@ body {
 
 /* Stage Container */
 .avatar-unveil-container {
+  margin: auto;
   position: relative;
   z-index: 2020;
   width: 92%;
@@ -2278,69 +2281,256 @@ body.unveil-opened .reveal {
    ============================================== */
 @media (max-width: 768px) {
   .section {
-    padding: 60px 16px;
+    padding: 50px 16px;
+  }
+
+  /* Unveil Overlay Responsive Fitting */
+  .avatar-unveil-container {
+    padding: 16px 12px 12px 12px;
+    max-height: 100dvh;
+    justify-content: space-evenly;
   }
 
   .unveil-header {
-    margin-bottom: 15px;
+    margin-bottom: 8px;
+  }
+
+  .shubho-symbol {
+    font-size: 1.25rem;
+    letter-spacing: 2px;
+    margin-bottom: 2px;
+  }
+
+  .sanskrit-mantra {
+    font-size: 0.82rem;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
   }
 
   .unveil-title {
-    font-size: 2.8rem;
+    font-size: clamp(2.1rem, 7vw, 2.7rem);
+    line-height: 1.05;
+  }
+
+  .unveil-tagline {
+    font-size: 0.74rem;
+    letter-spacing: 1px;
+    margin-top: 2px;
+  }
+
+  .unveil-instruction-badge {
+    padding: 5px 12px;
+    font-size: 0.72rem;
+    margin-top: 6px;
   }
 
   .avatar-stage {
-    min-height: 220px;
-    margin: 15px 0;
+    min-height: 185px;
+    margin: 8px 0 10px 0;
   }
 
   .avatar-character-card {
-    width: 120px;
+    width: 108px;
   }
 
   .avatar-circle-wrapper {
-    width: 95px;
-    height: 95px;
-  }
-
-  .avatar-img-frame {
     width: 82px;
     height: 82px;
   }
 
+  .avatar-img-frame {
+    width: 70px;
+    height: 70px;
+  }
+
   .avatar-bubble {
-    font-size: 0.72rem;
-    padding: 4px 10px;
-    margin-bottom: 8px;
+    font-size: 0.68rem;
+    padding: 3px 8px;
+    margin-bottom: 5px;
   }
 
   .avatar-name {
-    font-size: 1.05rem;
+    font-size: 0.98rem;
   }
 
   .avatar-action-pill {
-    font-size: 0.68rem;
-    padding: 3px 8px;
+    font-size: 0.62rem;
+    padding: 2px 7px;
   }
 
   .stage-path {
-    height: 60px;
-    margin: 0 4px;
+    height: 50px;
+    margin: 0 2px;
   }
 
   .mandap-heart-glow {
-    width: 46px;
-    height: 46px;
+    width: 40px;
+    height: 40px;
   }
 
   .mandap-rings {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
   .mandap-sub {
-    font-size: 0.52rem;
+    font-size: 0.48rem;
   }
 
+  .mandap-altar-label {
+    font-size: 0.62rem;
+  }
+
+  .unveil-bottom-hint {
+    margin-top: 6px;
+    gap: 4px;
+  }
+
+  .scroll-mouse-icon {
+    width: 18px;
+    height: 26px;
+  }
+
+  .hint-text {
+    font-size: 0.72rem;
+  }
+
+  /* Floating Controls */
+  .floating-controls {
+    top: 14px;
+    right: 14px;
+    gap: 8px;
+  }
+
+  .control-btn {
+    width: 38px;
+    height: 38px;
+    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  .control-btn .btn-icon {
+    font-size: 1rem;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    padding-top: 55px;
+  }
+
+  .couple-names-wrapper {
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .bride-name, .groom-name {
+    font-size: clamp(2.6rem, 11vw, 3.8rem);
+  }
+
+  .hero-subtitle {
+    font-size: 0.92rem;
+    padding: 0 10px;
+    margin-bottom: 18px;
+  }
+
+  .hero-couple-portrait-wrapper {
+    margin: 5px 0 24px;
+  }
+
+  .portrait-filigree-frame {
+    width: 220px;
+    height: 220px;
+  }
+
+  /* Date & Venue Pill on Mobile */
+  .date-venue-pill {
+    flex-direction: column;
+    padding: 16px 20px;
+    border-radius: 20px;
+    gap: 10px;
+    width: 100%;
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .pill-divider {
+    display: none;
+  }
+
+  .pill-item {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .pill-text {
+    font-size: 0.88rem;
+  }
+
+  .hero-cta-group {
+    gap: 10px;
+  }
+
+  .btn {
+    padding: 11px 18px;
+    font-size: 0.88rem;
+  }
+
+  /* Meet Couple Cards */
+  .couple-side-by-side-wrapper {
+    flex-direction: column;
+  }
+
+  .bride-card {
+    order: 1;
+  }
+
+  .couple-center-divider {
+    order: 2;
+  }
+
+  .groom-card {
+    order: 3;
+  }
+
+  /* Timer Grid */
+  .timer-grid {
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+
+  .timer-circle {
+    width: 64px;
+    height: 64px;
+  }
+
+  .timer-number {
+    font-size: 1.4rem;
+  }
+
+  .timer-label {
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+  }
+
+  .timer-colon {
+    font-size: 1.4rem;
+    margin-top: -16px;
+  }
+
+  .calendar-actions {
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    gap: 10px;
+  }
+
+  .calendar-actions .btn {
+    width: 100%;
+  }
+
+  /* Venue Showcase */
   .venue-showcase-card {
     flex-direction: column;
   }
@@ -2353,43 +2543,112 @@ body.unveil-opened .reveal {
     padding: 24px 18px;
   }
 
+  .venue-name {
+    font-size: 1.35rem;
+  }
+
+  .venue-address {
+    font-size: 0.92rem;
+  }
+
+  .venue-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .venue-actions .btn {
+    width: 100%;
+  }
+
+  /* Blessings & RSVP Form */
   .blessings-interactive-layout {
     flex-direction: column;
   }
 
-  .floating-controls {
-    top: 16px;
-    right: 16px;
+  .blessing-form-card {
+    padding: 24px 18px;
   }
 
-  .control-btn {
-    width: 42px;
-    height: 42px;
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-size: 16px; /* Prevents auto-zoom on iOS Safari */
+    padding: 11px 14px;
   }
 
+  .sticker-selector {
+    gap: 6px;
+  }
+
+  .sticker-btn {
+    font-size: 0.78rem;
+    padding: 6px 11px;
+  }
+
+  /* Polaroid Cards & Lightbox */
+  .polaroid-grid {
+    grid-template-columns: 1fr;
+    max-width: 360px;
+    margin: 0 auto;
+    gap: 24px;
+  }
+
+  .polaroid-tilt-1 { transform: rotate(-1.5deg); }
+  .polaroid-tilt-2 { transform: rotate(1.5deg); }
+  .polaroid-tilt-3 { transform: rotate(-1.2deg); }
+  .polaroid-tilt-4 { transform: rotate(1.2deg); }
+
+  .lightbox-content {
+    max-width: 95vw;
+    max-height: 88vh;
+  }
+
+  .lightbox-close-btn {
+    top: -42px;
+    right: 0;
+    width: 34px;
+    height: 34px;
+    font-size: 1.1rem;
+  }
+
+  .lightbox-caption {
+    font-size: 1.25rem;
+    margin-top: 8px;
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 360px) {
   .timer-circle {
+    width: 54px;
+    height: 54px;
+  }
+
+  .timer-number {
+    font-size: 1.15rem;
+  }
+
+  .timer-colon {
+    font-size: 1.15rem;
+    margin-top: -12px;
+  }
+
+  .bride-name, .groom-name {
+    font-size: 2.3rem;
+  }
+
+  .avatar-character-card {
+    width: 95px;
+  }
+
+  .avatar-circle-wrapper {
     width: 72px;
     height: 72px;
   }
 
-  .timer-number {
-    font-size: 1.6rem;
-  }
-
-  .couple-side-by-side-wrapper {
-    flex-direction: column;
-  }
-
-  .couple-center-divider {
-    order: 2;
-  }
-
-  .groom-card {
-    order: 3;
-  }
-
-  .bride-card {
-    order: 1;
+  .avatar-img-frame {
+    width: 62px;
+    height: 62px;
   }
 }
 

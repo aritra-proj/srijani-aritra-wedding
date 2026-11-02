@@ -1052,10 +1052,13 @@ function initFooterCoupleUnion() {
 
   if (!footer || !srijaniEl || !aritraEl || !mergedEl) return;
 
-  mergedEl.addEventListener("click", () => {
+  const triggerBottomCelebration = () => {
     showToast("🌸 #SRIARI — Srijani & Aritra Forever & Always! 💍💖");
     fireConfetti();
-  });
+  };
+  mergedEl.addEventListener("click", triggerBottomCelebration);
+  srijaniEl.addEventListener("click", triggerBottomCelebration);
+  aritraEl.addEventListener("click", triggerBottomCelebration);
 
   function updateFooterCouple() {
     const windowHeight = window.innerHeight || document.documentElement.clientHeight;
@@ -1073,15 +1076,18 @@ function initFooterCoupleUnion() {
       progress = Math.min(1, Math.max(0, footerProgress));
     }
 
-    // Merge threshold: right near the bottom of the page (progress >= 0.82 or distFromBottom <= 30px)
-    const isAtBottom = (progress >= 0.82) || (distFromBottom <= 30);
+    const isMobile = window.innerWidth < 768;
+    const mergeThreshold = isMobile ? 0.68 : 0.82;
+    const distThreshold = isMobile ? 70 : 30;
+    const maxWalkPercent = isMobile ? 18 : 34;
+
+    // Merge threshold: near the bottom of the page
+    const isAtBottom = (progress >= mergeThreshold) || (distFromBottom <= distThreshold);
 
     if (!isAtBottom) {
-      const walkProgress = Math.min(1, progress / 0.82); // 0 to 1
-      // Srijani moves from 4% towards ~38% (from left)
-      const srijaniPos = 4 + walkProgress * 34;
-      // Aritra moves from 4% towards ~38% (from right)
-      const aritraPos = 4 + walkProgress * 34;
+      const walkProgress = Math.min(1, progress / mergeThreshold); // 0 to 1
+      const srijaniPos = 4 + walkProgress * maxWalkPercent;
+      const aritraPos = 4 + walkProgress * maxWalkPercent;
 
       srijaniEl.style.opacity = `${(0.45 + walkProgress * 0.55).toFixed(2)}`;
       srijaniEl.style.left = `${srijaniPos.toFixed(1)}%`;
@@ -1102,10 +1108,10 @@ function initFooterCoupleUnion() {
     } else {
       // Merged state: converted to #SRIARI at the bottom of the page!
       srijaniEl.style.opacity = "0";
-      srijaniEl.style.left = "38%";
+      srijaniEl.style.left = `${(4 + maxWalkPercent).toFixed(1)}%`;
 
       aritraEl.style.opacity = "0";
-      aritraEl.style.right = "38%";
+      aritraEl.style.right = `${(4 + maxWalkPercent).toFixed(1)}%`;
 
       if (heartEl) {
         heartEl.style.opacity = "0";
