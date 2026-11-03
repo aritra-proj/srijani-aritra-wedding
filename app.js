@@ -42,9 +42,45 @@ let clientIpAddress = "Detecting...";
 
 
 // ==========================================================================
+// REFRESH = START OVER FROM THE TOP
+// A reload should replay the opening animation and land at the top, not restore
+// the old scroll position or jump to a #section left in the URL by an earlier tap.
+// ==========================================================================
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
+function isPageReload() {
+  try {
+    const nav = performance.getEntriesByType("navigation")[0];
+    if (nav) return nav.type === "reload";
+    return !!(performance.navigation && performance.navigation.type === 1);
+  } catch (err) {
+    return false;
+  }
+}
+
+// Bypasses the CSS smooth scrolling so the jump is immediate
+function jumpToTop() {
+  try {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  } catch (err) {
+    window.scrollTo(0, 0);
+  }
+}
+
+if (isPageReload() && window.location.hash) {
+  history.replaceState(null, "", window.location.pathname + window.location.search);
+}
+
+
+// ==========================================================================
 // DOM INITIALIZATION (Defensive execution to prevent cascade breaks)
 // ==========================================================================
 document.addEventListener("DOMContentLoaded", () => {
+  // Shared deep links (e.g. ...#venue) still open at that section; everything else starts at the top
+  if (!window.location.hash) jumpToTop();
+
   const safeInit = (name, fn) => {
     try {
       fn();
@@ -65,6 +101,11 @@ document.addEventListener("DOMContentLoaded", () => {
   safeInit("ShareFeatures", initShareFeatures);
   safeInit("Lightbox", initLightbox);
   safeInit("ScrollAnimations", initScrollAnimations);
+});
+
+// Some browsers re-apply the old scroll position once everything has loaded
+window.addEventListener("load", () => {
+  if (!isOverlayOpen && !window.location.hash) jumpToTop();
 });
 
 
@@ -108,11 +149,21 @@ function initAvatarUnveil() {
       if (brideBubble) brideBubble.querySelector("span").textContent = "Waiting for you, my Groom! 💕";
     }
 
-    // Update status pills
+    const isMobile = window.innerWidth < 768;
+
+    // Update status pills (short text on phones so the pills fit side by side when the couple meet)
     const walkerPill = walker.querySelector(".avatar-action-pill");
     const targetPill = target.querySelector(".avatar-action-pill");
-    if (walkerPill) walkerPill.textContent = isBrideChosen ? "🌸 Walking to Aritra..." : "💖 Walking to Srijani...";
-    if (targetPill) targetPill.textContent = isBrideChosen ? "🤵 Waiting with joy... 💓" : "👰 Waiting with a smile... 💕";
+    if (walkerPill) {
+      walkerPill.textContent = isMobile
+        ? (isBrideChosen ? "🌸 On my way..." : "💖 On my way...")
+        : (isBrideChosen ? "🌸 Walking to Aritra..." : "💖 Walking to Srijani...");
+    }
+    if (targetPill) {
+      targetPill.textContent = isMobile
+        ? (isBrideChosen ? "💓 Waiting..." : "💕 Waiting...")
+        : (isBrideChosen ? "🤵 Waiting with joy... 💓" : "👰 Waiting with a smile... 💕");
+    }
 
     target.classList.add("waiting-target");
     walker.classList.add("walking-to-target");
@@ -124,8 +175,9 @@ function initAvatarUnveil() {
     const walkerCenter = walkerRect.left + walkerRect.width / 2;
     const targetCenter = targetRect.left + targetRect.width / 2;
 
-    const isMobile = window.innerWidth < 768;
-    const targetStopOffset = (isMobile ? 55 : 85) * (isBrideChosen ? 1 : -1);
+    // On phones, stop right beside the partner (card width + a small gap) so names and bubbles don't overlap
+    const stopDistance = isMobile ? targetRect.width + 8 : 85;
+    const targetStopOffset = stopDistance * (isBrideChosen ? 1 : -1);
     const totalDeltaX = (targetCenter + targetStopOffset) - walkerCenter;
 
     // Smooth, gradual walk duration (2.6 seconds)
@@ -168,6 +220,8 @@ function initAvatarUnveil() {
 
       // After sweet celebration pause, open curtains and reveal page
       setTimeout(() => {
+        // A swipe on the opening screen can scroll the page underneath; always reveal from the top
+        jumpToTop();
         isOverlayOpen = true;
         overlay.classList.add("opened");
         document.body.classList.add("unveil-opened");
@@ -626,6 +680,9 @@ function initGuestbook() {
   const stickerBtns = document.querySelectorAll(".sticker-btn");
   const submitBtn = document.getElementById("submitBlessingBtn");
 
+  // Some browsers (e.g. Firefox) refill typed form values after a refresh; start clean
+  if (form) form.reset();
+
   // Fetch client IP in background
   detectClientIp();
 
@@ -790,9 +847,9 @@ function initGuestbook() {
           <span class="blessing-author">${escapeHtml(b.name)}</span>
           <span class="blessing-time">${escapeHtml(b.timestamp || b.time || "Recently")}</span>
         </div>
-        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:8px;">
+        <div class="blessing-tags">
           <span class="blessing-status-tag">${escapeHtml(b.status || "Joyfully Attending")}</span>
-          ${b.sticker ? `<span style="display:inline-block; font-size:0.75rem; font-weight:600; color:var(--primary-crimson); background:rgba(212,175,55,0.15); border:1px solid rgba(212,175,55,0.35); padding:2px 10px; border-radius:12px;">${escapeHtml(b.sticker)}</span>` : ""}
+          ${b.sticker ? `<span class="blessing-sticker-tag">${escapeHtml(b.sticker)}</span>` : ""}
         </div>
         <p class="blessing-text">"${escapeHtml(b.message)}"</p>
       `;
@@ -1077,9 +1134,10 @@ function initFooterCoupleUnion() {
     }
 
     const isMobile = window.innerWidth < 768;
-    const mergeThreshold = isMobile ? 0.68 : 0.82;
-    const distThreshold = isMobile ? 70 : 30;
-    const maxWalkPercent = isMobile ? 18 : 34;
+    const isSmallMobile = window.innerWidth <= 400;
+    const mergeThreshold = isSmallMobile ? 0.58 : (isMobile ? 0.65 : 0.82);
+    const distThreshold = isSmallMobile ? 90 : (isMobile ? 65 : 30);
+    const maxWalkPercent = isSmallMobile ? 10 : (isMobile ? 14 : 34);
 
     // Merge threshold: near the bottom of the page
     const isAtBottom = (progress >= mergeThreshold) || (distFromBottom <= distThreshold);
@@ -1088,12 +1146,13 @@ function initFooterCoupleUnion() {
       const walkProgress = Math.min(1, progress / mergeThreshold); // 0 to 1
       const srijaniPos = 4 + walkProgress * maxWalkPercent;
       const aritraPos = 4 + walkProgress * maxWalkPercent;
+      const walkerOpacity = walkProgress > 0.82 ? Math.max(0, 1 - (walkProgress - 0.82) * 5) : (0.45 + walkProgress * 0.55);
 
-      srijaniEl.style.opacity = `${(0.45 + walkProgress * 0.55).toFixed(2)}`;
+      srijaniEl.style.opacity = `${walkerOpacity.toFixed(2)}`;
       srijaniEl.style.left = `${srijaniPos.toFixed(1)}%`;
       srijaniEl.style.transform = `translateY(-50%) scale(${(0.92 + walkProgress * 0.08).toFixed(2)})`;
 
-      aritraEl.style.opacity = `${(0.45 + walkProgress * 0.55).toFixed(2)}`;
+      aritraEl.style.opacity = `${walkerOpacity.toFixed(2)}`;
       aritraEl.style.right = `${aritraPos.toFixed(1)}%`;
       aritraEl.style.transform = `translateY(-50%) scale(${(0.92 + walkProgress * 0.08).toFixed(2)})`;
 

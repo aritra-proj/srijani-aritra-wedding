@@ -31,10 +31,18 @@
   --radius-lg: 28px;
   
   --font-script: 'Great Vibes', cursive;
-  --font-royal: 'Cinzel Decorative', serif;
+  /* Plain Cinzel: Cinzel Decorative's swash letters interlock ("HE" in Cherished, "OO" in Sindoor, "&" into the next word) */
+  --font-royal: 'Cinzel', serif;
   --font-serif: 'Playfair Display', serif;
   --font-body: 'Plus Jakarta Sans', sans-serif;
   --font-marcellus: 'Marcellus', serif;
+
+  /* Soft pastel section backgrounds */
+  --bg-blush: linear-gradient(180deg, #FFF6F7 0%, #FBE6EB 100%);
+  --bg-lavender: linear-gradient(180deg, #F8F4FC 0%, #EEE6F8 100%);
+
+  /* The invitation is designed light-only; stop browsers from auto-darkening it */
+  color-scheme: only light;
 }
 
 /* Reset & Base Setup */
@@ -58,6 +66,12 @@ body {
   overflow-x: hidden;
   position: relative;
   min-height: 100vh;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Buttons & form controls don't inherit the page font by default */
+button, input, select, textarea {
+  font-family: inherit;
 }
 
 /* Canvases for Petals and Confetti */
@@ -198,7 +212,7 @@ body {
   justify-content: center;
   overflow-y: auto;
   overflow-x: hidden;
-  background: radial-gradient(circle at center, #2E0509 0%, #170204 100%);
+  background: radial-gradient(circle at center, #FFFAF8 0%, #FBE4E9 100%);
   transition: opacity 1.2s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
@@ -215,19 +229,19 @@ body {
   height: 100vh;
   z-index: 2010;
   transition: transform 1.6s cubic-bezier(0.77, 0, 0.175, 1);
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 40px rgba(122, 12, 22, 0.1);
 }
 
 .curtain-left {
   left: 0;
-  background: linear-gradient(90deg, #420409 0%, #680A12 70%, #850E17 100%);
-  border-right: 2px solid var(--gold-primary);
+  background: linear-gradient(90deg, #F7D9E0 0%, #FBE8EC 70%, #FFF3F5 100%);
+  border-right: 1px solid rgba(212, 175, 55, 0.25);
 }
 
 .curtain-right {
   right: 0;
-  background: linear-gradient(270deg, #420409 0%, #680A12 70%, #850E17 100%);
-  border-left: 2px solid var(--gold-primary);
+  background: linear-gradient(270deg, #F7D9E0 0%, #FBE8EC 70%, #FFF3F5 100%);
+  border-left: 1px solid rgba(212, 175, 55, 0.25);
 }
 
 .curtain-fabric {
@@ -238,8 +252,8 @@ body {
   height: 100%;
   background-image: repeating-linear-gradient(
     90deg,
-    rgba(212, 175, 55, 0.04) 0px,
-    rgba(0, 0, 0, 0.15) 30px,
+    rgba(255, 255, 255, 0.35) 0px,
+    rgba(184, 29, 36, 0.05) 30px,
     rgba(212, 175, 55, 0.08) 60px
   );
   opacity: 0.8;
@@ -266,7 +280,7 @@ body {
   justify-content: center;
   padding: 30px 20px;
   text-align: center;
-  color: #FFFDF9;
+  color: var(--text-dark);
   user-select: none;
 }
 
@@ -278,16 +292,13 @@ body {
   font-family: var(--font-royal);
   font-size: 1.6rem;
   letter-spacing: 4px;
-  background: var(--gold-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--sindoor-red);
   margin-bottom: 6px;
-  text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
 }
 
 .sanskrit-mantra {
   font-size: 1rem;
-  color: var(--gold-light);
+  color: var(--gold-dark);
   letter-spacing: 2px;
   opacity: 0.9;
   margin-bottom: 8px;
@@ -296,26 +307,27 @@ body {
 .unveil-title {
   font-family: var(--font-script);
   font-size: clamp(2.8rem, 6vw, 4.4rem);
-  color: #FFFDF9;
+  color: var(--primary-crimson);
   line-height: 1.1;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 25px rgba(212, 175, 55, 0.4);
+  text-shadow: 2px 3px 0 rgba(212, 175, 55, 0.25);
 }
 
 .unveil-title span {
   font-family: var(--font-serif);
   font-size: 1.5rem;
   font-style: italic;
-  color: var(--gold-primary);
+  color: var(--gold-dark);
   margin: 0 10px;
 }
 
 .unveil-tagline {
   font-size: 0.95rem;
-  color: var(--rose-blush);
+  color: var(--text-muted);
   letter-spacing: 1.5px;
   text-transform: uppercase;
   margin-top: 6px;
   opacity: 0.95;
+  text-wrap: balance;
 }
 
 .unveil-instruction-badge {
@@ -324,17 +336,17 @@ body {
   gap: 10px;
   margin-top: 18px;
   padding: 10px 24px;
-  background: rgba(122, 12, 22, 0.7);
+  background: rgba(255, 253, 249, 0.92);
   border: 1px solid var(--gold-primary);
   border-radius: 50px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 20px rgba(212, 175, 55, 0.3);
+  box-shadow: 0 4px 18px rgba(122, 12, 22, 0.1), 0 0 20px rgba(212, 175, 55, 0.25);
   font-size: 0.95rem;
-  color: #FFF8E7;
+  color: var(--text-dark);
   animation: pulseGlow 2s infinite alternate ease-in-out;
 }
 
 .unveil-instruction-badge strong {
-  color: var(--gold-light);
+  color: var(--sindoor-red);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -342,11 +354,11 @@ body {
 @keyframes pulseGlow {
   0% {
     transform: scale(0.98);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), 0 0 12px rgba(212, 175, 55, 0.2);
+    box-shadow: 0 4px 14px rgba(122, 12, 22, 0.08), 0 0 12px rgba(212, 175, 55, 0.2);
   }
   100% {
     transform: scale(1.02);
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5), 0 0 30px rgba(212, 175, 55, 0.55);
+    box-shadow: 0 6px 22px rgba(122, 12, 22, 0.14), 0 0 28px rgba(212, 175, 55, 0.45);
   }
 }
 
@@ -381,7 +393,7 @@ body {
 }
 
 .avatar-character-card:focus-visible {
-  outline: 2px solid var(--gold-light);
+  outline: 2px solid var(--gold-dark);
   border-radius: 20px;
 }
 
@@ -394,7 +406,7 @@ body {
   padding: 6px 14px;
   border-radius: 18px;
   margin-bottom: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 6px 18px rgba(122, 12, 22, 0.14);
   position: relative;
   white-space: nowrap;
   animation: floatBubble 2.5s infinite ease-in-out alternate;
@@ -466,7 +478,7 @@ body {
   border-radius: 50%;
   overflow: hidden;
   border: 3.5px solid var(--gold-primary);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 20px var(--gold-glow);
+  box-shadow: 0 8px 22px rgba(122, 12, 22, 0.2), 0 0 20px var(--gold-glow);
   background: var(--primary-dark);
 }
 
@@ -495,7 +507,7 @@ body {
   justify-content: center;
   font-size: 1.1rem;
   border: 1.5px solid var(--gold-primary);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 8px rgba(122, 12, 22, 0.15);
 }
 
 .avatar-meta {
@@ -508,7 +520,7 @@ body {
 .avatar-title-badge {
   font-size: 0.72rem;
   letter-spacing: 1.8px;
-  color: var(--gold-light);
+  color: var(--gold-dark);
   font-weight: 700;
   margin-bottom: 2px;
 }
@@ -516,7 +528,7 @@ body {
 .avatar-name {
   font-family: var(--font-royal);
   font-size: 1.25rem;
-  color: #FFFDF9;
+  color: var(--primary-crimson);
   letter-spacing: 1px;
 }
 
@@ -529,7 +541,7 @@ body {
   padding: 5px 12px;
   border-radius: 20px;
   border: 1px solid var(--gold-primary);
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 10px rgba(122, 12, 22, 0.2);
   transition: all 0.3s ease;
 }
 
@@ -610,7 +622,7 @@ body {
 
 .mandap-altar-label {
   font-size: 0.7rem;
-  color: var(--rose-blush);
+  color: var(--text-muted);
   margin-top: 4px;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -683,12 +695,12 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0.6);
-  background: rgba(30, 4, 8, 0.95);
+  background: #FFFDF9;
   border: 2px solid var(--gold-primary);
   border-radius: 24px;
   padding: 30px 40px;
   text-align: center;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 45px rgba(212, 175, 55, 0.7);
+  box-shadow: 0 20px 50px rgba(122, 12, 22, 0.18), 0 0 40px rgba(212, 175, 55, 0.45);
   z-index: 100;
   opacity: 0;
   transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -716,22 +728,20 @@ body {
 .celebration-title {
   font-family: var(--font-royal);
   font-size: clamp(2rem, 5vw, 3rem);
-  background: var(--gold-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--primary-crimson);
   letter-spacing: 2px;
 }
 
 .celebration-subtitle {
   font-family: var(--font-script);
   font-size: 1.8rem;
-  color: var(--rose-blush);
+  color: var(--sindoor-red);
   margin: 5px 0 10px;
 }
 
 .celebration-welcome {
   font-size: 0.95rem;
-  color: #FFFDF9;
+  color: var(--text-dark);
   letter-spacing: 1px;
 }
 
@@ -754,7 +764,7 @@ body {
 .scroll-mouse-icon {
   width: 22px;
   height: 36px;
-  border: 2px solid var(--gold-light);
+  border: 2px solid var(--gold-dark);
   border-radius: 12px;
   position: relative;
   display: flex;
@@ -777,8 +787,9 @@ body {
 
 .hint-text {
   font-size: 0.85rem;
-  color: var(--gold-light);
+  color: var(--text-muted);
   letter-spacing: 1px;
+  text-wrap: balance;
 }
 
 
@@ -830,11 +841,11 @@ body {
   color: var(--primary-crimson);
   letter-spacing: 1px;
   line-height: 1.25;
+  text-wrap: balance;
 }
 
 .section-title.text-gold {
-  color: #FFFDF9;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  color: var(--primary-crimson);
 }
 
 .title-ornament {
@@ -853,6 +864,7 @@ body {
   max-width: 680px;
   margin: 0 auto;
   line-height: 1.7;
+  text-wrap: pretty;
 }
 
 
@@ -866,7 +878,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 110px 20px 80px;
-  background: radial-gradient(circle at 50% 25%, #FFFDF9 0%, #F5E8D8 55%, #EAD4C0 100%);
+  background: radial-gradient(circle at 50% 25%, #FFFDF9 0%, #FAF1E8 55%, #F4E5DA 100%);
   text-align: center;
   overflow: hidden;
 }
@@ -948,6 +960,7 @@ body {
   max-width: 640px;
   margin-bottom: 20px;
   line-height: 1.5;
+  text-wrap: pretty;
 }
 
 /* Couple Names Wrapper */
@@ -1474,6 +1487,7 @@ body {
   font-size: 1.35rem;
   color: var(--primary-crimson);
   margin-bottom: 2px;
+  text-wrap: balance;
 }
 
 .ritual-bengali-name {
@@ -1519,9 +1533,12 @@ body {
   transition: transform 0.4s ease, z-index 0.4s;
 }
 
-.polaroid-card:hover {
-  transform: translateY(-10px) scale(1.05) !important;
-  z-index: 10;
+/* Hover lift only on devices with a real pointer, so it doesn't "stick" after a tap on phones */
+@media (hover: hover) {
+  .polaroid-card:hover {
+    transform: translateY(-10px) scale(1.05) !important;
+    z-index: 10;
+  }
 }
 
 .polaroid-tilt-1 { transform: rotate(-2deg); }
@@ -1571,8 +1588,8 @@ body {
   position: absolute;
   bottom: 8px;
   right: 8px;
-  background: rgba(0, 0, 0, 0.65);
-  color: #FFF;
+  background: rgba(255, 253, 249, 0.92);
+  color: var(--primary-crimson);
   font-size: 0.72rem;
   padding: 3px 8px;
   border-radius: 12px;
@@ -1597,6 +1614,7 @@ body {
   font-size: 1.25rem;
   color: var(--primary-crimson);
   line-height: 1.2;
+  text-wrap: balance;
 }
 
 .love-reaction-btn {
@@ -1605,6 +1623,7 @@ body {
   border-radius: 18px;
   padding: 4px 10px;
   font-size: 0.8rem;
+  color: var(--primary-crimson);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1624,8 +1643,8 @@ body {
    COUNTDOWN & SAVE THE DATE
    ============================================== */
 .countdown-section {
-  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-crimson) 100%);
-  color: #FFFDF9;
+  background: var(--bg-blush);
+  color: var(--text-dark);
   position: relative;
   overflow: hidden;
   color-scheme: only light;
@@ -1639,14 +1658,19 @@ body {
   position: relative;
   z-index: 2;
   padding: 30px 20px;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1.5px solid rgba(212, 175, 55, 0.4);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
   color-scheme: only light;
   forced-color-adjust: none;
 }
 
 .countdown-subtitle {
   font-size: 1.15rem;
-  color: var(--rose-blush);
+  color: var(--text-muted);
   letter-spacing: 1px;
+  margin-top: 8px;
   margin-bottom: 35px;
 }
 
@@ -1673,14 +1697,13 @@ body {
   width: 90px;
   height: 90px;
   border-radius: 50%;
-  background: rgba(35, 4, 8, 0.65);
+  background: #FFFDF9;
   border: 2px solid var(--gold-primary);
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45), 0 0 25px rgba(212, 175, 55, 0.35);
+  box-shadow: 0 6px 18px rgba(122, 12, 22, 0.1), 0 0 18px rgba(212, 175, 55, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 8px;
-  backdrop-filter: blur(8px);
   color-scheme: only light;
   forced-color-adjust: none;
 }
@@ -1689,30 +1712,16 @@ body {
   font-family: var(--font-royal);
   font-size: 2.2rem;
   font-weight: 700;
-  color: #FFF2A6;
-  background: linear-gradient(180deg, #FFFFFF 0%, #FFF2A6 45%, #E3BE58 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 16px rgba(243, 218, 120, 0.6);
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.7));
+  color: var(--primary-crimson);
   color-scheme: only light;
   forced-color-adjust: none;
-}
-
-/* Fallback ensuring solid bright gold if gradient text clipping fails or inverts */
-@supports not (-webkit-background-clip: text) {
-  .timer-number {
-    color: #FFF2A6 !important;
-    -webkit-text-fill-color: #FFF2A6 !important;
-  }
 }
 
 .timer-label {
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 2px;
-  color: #F9E8A2;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+  color: var(--gold-dark);
   color-scheme: only light;
   forced-color-adjust: none;
 }
@@ -1720,8 +1729,7 @@ body {
 .timer-colon {
   font-family: var(--font-royal);
   font-size: 2rem;
-  color: #F5D36B;
-  text-shadow: 0 0 14px rgba(245, 211, 107, 0.5);
+  color: var(--gold-primary);
   margin-top: -24px;
   color-scheme: only light;
   forced-color-adjust: none;
@@ -1760,14 +1768,15 @@ body {
 }
 
 .ical-btn {
-  background: rgba(255, 255, 255, 0.15);
-  color: #FFFDF9;
-  border: 1px solid var(--gold-light);
-  backdrop-filter: blur(5px);
+  background: #FFFDF9;
+  color: var(--primary-crimson);
+  border: 1.5px solid var(--gold-primary);
+  box-shadow: var(--shadow-soft);
 }
 
 .ical-btn:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: #FFF;
+  border-color: var(--sindoor-red);
   transform: translateY(-3px);
 }
 
@@ -1798,21 +1807,24 @@ body {
 }
 
 .venue-img {
+  position: absolute;
+  inset: 0;
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center 40%;
 }
 
 .venue-overlay-badge {
   position: absolute;
   top: 18px;
   left: 18px;
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(255, 253, 249, 0.92);
   border: 1px solid var(--gold-primary);
   border-radius: 20px;
   padding: 6px 16px;
-  color: var(--gold-light);
+  color: var(--primary-crimson);
   font-size: 0.85rem;
   font-weight: 600;
   backdrop-filter: blur(6px);
@@ -1990,6 +2002,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
   margin-bottom: 18px;
 }
 
@@ -1997,6 +2010,7 @@ body {
   font-family: var(--font-royal);
   font-size: 1.45rem;
   color: var(--primary-crimson);
+  text-wrap: balance;
 }
 
 .wall-count {
@@ -2006,6 +2020,8 @@ body {
   font-weight: 700;
   padding: 4px 14px;
   border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .blessing-cards-list {
@@ -2043,8 +2059,10 @@ body {
 
 .blessing-item-top {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2px 12px;
   margin-bottom: 6px;
 }
 
@@ -2058,6 +2076,15 @@ body {
 .blessing-time {
   font-size: 0.75rem;
   color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.blessing-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
 }
 
 .blessing-status-tag {
@@ -2068,7 +2095,17 @@ body {
   background: rgba(184, 29, 36, 0.06);
   padding: 2px 10px;
   border-radius: 12px;
-  margin-bottom: 8px;
+}
+
+.blessing-sticker-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--primary-crimson);
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  padding: 2px 10px;
+  border-radius: 12px;
 }
 
 .blessing-text {
@@ -2083,8 +2120,8 @@ body {
    FOOTER & SHARE BAR
    ============================================== */
 .footer-section {
-  background: linear-gradient(180deg, #2E0509 0%, #150204 100%);
-  color: #FFFDF9;
+  background: var(--bg-lavender);
+  color: var(--text-dark);
   padding: 70px 20px 90px;
   text-align: center;
   position: relative;
@@ -2164,13 +2201,13 @@ body {
 
 .footer-copy p {
   font-size: 0.95rem;
-  color: #E2CECE;
+  color: var(--text-muted);
 }
 
 .tiny-credit {
   font-size: 0.78rem !important;
-  color: var(--gold-light) !important;
-  opacity: 0.75;
+  color: var(--gold-dark) !important;
+  opacity: 0.85;
   margin-top: 6px;
 }
 
@@ -2202,7 +2239,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.88);
+  background: rgba(255, 246, 247, 0.94);
   backdrop-filter: blur(8px);
 }
 
@@ -2239,7 +2276,7 @@ body {
   max-height: 75vh;
   border-radius: 12px;
   border: 3px solid var(--gold-primary);
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 15px 40px rgba(122, 12, 22, 0.22);
   object-fit: contain;
 }
 
@@ -2247,7 +2284,7 @@ body {
   margin-top: 12px;
   font-family: var(--font-script);
   font-size: 1.8rem;
-  color: var(--gold-light);
+  color: var(--primary-crimson);
   text-align: center;
 }
 
@@ -2257,22 +2294,28 @@ body {
    ============================================== */
 .toast-notification {
   position: fixed;
-  bottom: 60px;
+  top: max(16px, env(safe-area-inset-top));
+  bottom: auto;
   left: 50%;
-  transform: translateX(-50%) translateY(30px);
-  background: rgba(30, 4, 8, 0.95);
+  transform: translateX(-50%) translateY(-25px);
+  background: rgba(255, 253, 249, 0.98);
   border: 1.5px solid var(--gold-primary);
-  color: #FFFDF9;
-  padding: 12px 24px;
+  color: var(--primary-crimson);
+  font-weight: 600;
+  padding: 8px 18px;
   border-radius: 30px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 0.92rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), var(--shadow-gold);
+  gap: 8px;
+  font-size: 0.84rem;
+  box-shadow: 0 10px 28px rgba(122, 12, 22, 0.15), var(--shadow-gold);
   z-index: 2200;
   opacity: 0;
   pointer-events: none;
+  max-width: calc(100vw - 32px);
+  width: max-content;
+  box-sizing: border-box;
+  text-align: center;
   transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -2304,396 +2347,19 @@ body.unveil-opened .reveal {
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-
-/* ==============================================
-   RESPONSIVE DESIGN (MOBILE & TABLET)
-   ============================================== */
-@media (max-width: 768px) {
-  .section {
-    padding: 50px 16px;
-  }
-
-  /* Unveil Overlay Responsive Fitting */
-  .avatar-unveil-container {
-    padding: 16px 12px 12px 12px;
-    max-height: 100dvh;
-    justify-content: space-evenly;
-  }
-
-  .unveil-header {
-    margin-bottom: 8px;
-  }
-
-  .shubho-symbol {
-    font-size: 1.25rem;
-    letter-spacing: 2px;
-    margin-bottom: 2px;
-  }
-
-  .sanskrit-mantra {
-    font-size: 0.82rem;
-    letter-spacing: 1px;
-    margin-bottom: 4px;
-  }
-
-  .unveil-title {
-    font-size: clamp(2.1rem, 7vw, 2.7rem);
-    line-height: 1.05;
-  }
-
-  .unveil-tagline {
-    font-size: 0.74rem;
-    letter-spacing: 1px;
-    margin-top: 2px;
-  }
-
-  .unveil-instruction-badge {
-    padding: 5px 12px;
-    font-size: 0.72rem;
-    margin-top: 6px;
-  }
-
-  .avatar-stage {
-    min-height: 185px;
-    margin: 8px 0 10px 0;
-  }
-
-  .avatar-character-card {
-    width: 108px;
-  }
-
-  .avatar-circle-wrapper {
-    width: 82px;
-    height: 82px;
-  }
-
-  .avatar-img-frame {
-    width: 70px;
-    height: 70px;
-  }
-
-  .avatar-bubble {
-    font-size: 0.68rem;
-    padding: 3px 8px;
-    margin-bottom: 5px;
-  }
-
-  .avatar-name {
-    font-size: 0.98rem;
-  }
-
-  .avatar-action-pill {
-    font-size: 0.62rem;
-    padding: 2px 7px;
-  }
-
-  .stage-path {
-    height: 50px;
-    margin: 0 2px;
-  }
-
-  .mandap-heart-glow {
-    width: 40px;
-    height: 40px;
-  }
-
-  .mandap-rings {
-    font-size: 0.9rem;
-  }
-
-  .mandap-sub {
-    font-size: 0.48rem;
-  }
-
-  .mandap-altar-label {
-    font-size: 0.62rem;
-  }
-
-  .unveil-bottom-hint {
-    margin-top: 6px;
-    gap: 4px;
-  }
-
-  .scroll-mouse-icon {
-    width: 18px;
-    height: 26px;
-  }
-
-  .hint-text {
-    font-size: 0.72rem;
-  }
-
-  /* Floating Controls */
-  .floating-controls {
-    top: 14px;
-    right: 14px;
-    gap: 8px;
-  }
-
-  .control-btn {
-    width: 38px;
-    height: 38px;
-    backdrop-filter: blur(8px);
-    background: rgba(255, 255, 255, 0.9);
-  }
-
-  .control-btn .btn-icon {
-    font-size: 1rem;
-  }
-
-  /* Hero Section */
-  .hero-section {
-    padding-top: 55px;
-  }
-
-  .couple-names-wrapper {
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-
-  .bride-name, .groom-name {
-    font-size: clamp(2.6rem, 11vw, 3.8rem);
-  }
-
-  .hero-subtitle {
-    font-size: 0.92rem;
-    padding: 0 10px;
-    margin-bottom: 18px;
-  }
-
-  .hero-couple-portrait-wrapper {
-    margin: 5px 0 24px;
-  }
-
-  .portrait-filigree-frame {
-    width: 220px;
-    height: 220px;
-  }
-
-  /* Date & Venue Pill on Mobile */
-  .date-venue-pill {
-    flex-direction: column;
-    padding: 16px 20px;
-    border-radius: 20px;
-    gap: 10px;
-    width: 100%;
-    max-width: 360px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .pill-divider {
-    display: none;
-  }
-
-  .pill-item {
-    width: 100%;
-    justify-content: center;
-    text-align: center;
-  }
-
-  .pill-text {
-    font-size: 0.88rem;
-  }
-
-  .hero-cta-group {
-    gap: 10px;
-  }
-
-  .btn {
-    padding: 11px 18px;
-    font-size: 0.88rem;
-  }
-
-  /* Meet Couple Cards */
-  .couple-side-by-side-wrapper {
-    flex-direction: column;
-  }
-
-  .bride-card {
-    order: 1;
-  }
-
-  .couple-center-divider {
-    order: 2;
-  }
-
-  .groom-card {
-    order: 3;
-  }
-
-  /* Timer Grid */
-  .timer-grid {
-    gap: 8px;
-    margin-bottom: 28px;
-  }
-
-  .timer-circle {
-    width: 64px;
-    height: 64px;
-  }
-
-  .timer-number {
-    font-size: 1.4rem;
-  }
-
-  .timer-label {
-    font-size: 0.65rem;
-    letter-spacing: 1px;
-  }
-
-  .timer-colon {
-    font-size: 1.4rem;
-    margin-top: -16px;
-  }
-
-  .calendar-actions {
-    flex-direction: column;
-    width: 100%;
-    max-width: 320px;
-    margin: 0 auto;
-    gap: 10px;
-  }
-
-  .calendar-actions .btn {
-    width: 100%;
-  }
-
-  /* Venue Showcase */
-  .venue-showcase-card {
-    flex-direction: column;
-  }
-
-  .venue-image-wrapper {
-    min-height: 220px;
-  }
-
-  .venue-details-content {
-    padding: 24px 18px;
-  }
-
-  .venue-name {
-    font-size: 1.35rem;
-  }
-
-  .venue-address {
-    font-size: 0.92rem;
-  }
-
-  .venue-actions {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .venue-actions .btn {
-    width: 100%;
-  }
-
-  /* Blessings & RSVP Form */
-  .blessings-interactive-layout {
-    flex-direction: column;
-  }
-
-  .blessing-form-card {
-    padding: 24px 18px;
-  }
-
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    font-size: 16px; /* Prevents auto-zoom on iOS Safari */
-    padding: 11px 14px;
-  }
-
-  .sticker-selector {
-    gap: 6px;
-  }
-
-  .sticker-btn {
-    font-size: 0.78rem;
-    padding: 6px 11px;
-  }
-
-  /* Polaroid Cards & Lightbox */
-  .polaroid-grid {
-    grid-template-columns: 1fr;
-    max-width: 360px;
-    margin: 0 auto;
-    gap: 24px;
-  }
-
-  .polaroid-tilt-1 { transform: rotate(-1.5deg); }
-  .polaroid-tilt-2 { transform: rotate(1.5deg); }
-  .polaroid-tilt-3 { transform: rotate(-1.2deg); }
-  .polaroid-tilt-4 { transform: rotate(1.2deg); }
-
-  .lightbox-content {
-    max-width: 95vw;
-    max-height: 88vh;
-  }
-
-  .lightbox-close-btn {
-    top: -42px;
-    right: 0;
-    width: 34px;
-    height: 34px;
-    font-size: 1.1rem;
-  }
-
-  .lightbox-caption {
-    font-size: 1.25rem;
-    margin-top: 8px;
-    padding: 0 10px;
-  }
-}
-
-@media (max-width: 360px) {
-  .timer-circle {
-    width: 54px;
-    height: 54px;
-  }
-
-  .timer-number {
-    font-size: 1.15rem;
-  }
-
-  .timer-colon {
-    font-size: 1.15rem;
-    margin-top: -12px;
-  }
-
-  .bride-name, .groom-name {
-    font-size: 2.3rem;
-  }
-
-  .avatar-character-card {
-    width: 95px;
-  }
-
-  .avatar-circle-wrapper {
-    width: 72px;
-    height: 72px;
-  }
-
-  .avatar-img-frame {
-    width: 62px;
-    height: 62px;
-  }
-}
-
-
 /* ==========================================================================
-   ROYAL FOOTER SECTION
+   ROYAL FOOTER SECTION (BASE STYLES)
    ========================================================================== */
 .footer-section {
-  background: radial-gradient(circle at 50% 15%, #5E0C17 0%, #35040B 60%, #1A0205 100%);
-  color: #FFFDF9;
+  background: var(--bg-lavender);
+  color: var(--text-dark);
   text-align: center;
   padding: 85px 24px 60px 24px;
   position: relative;
   border-top: 3px solid rgba(212, 175, 55, 0.45);
-  box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
+  box-shadow: 0 -10px 30px rgba(90, 60, 130, 0.06);
+  /* visible so the "🌸 💍 🌸" badge sitting on the top border isn't clipped */
+  overflow: visible;
 }
 
 .footer-section::before {
@@ -2702,13 +2368,13 @@ body.unveil-opened .reveal {
   top: -14px;
   left: 50%;
   transform: translateX(-50%);
-  background: #35040B;
+  background: #F8F4FC;
   padding: 2px 20px;
   font-size: 0.95rem;
   color: var(--gold-primary);
   border-radius: 14px;
-  border: 1px solid rgba(212, 175, 55, 0.4);
-  box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.25);
 }
 
 .footer-container {
@@ -2722,49 +2388,57 @@ body.unveil-opened .reveal {
   font-family: var(--font-royal);
   font-size: 2.2rem;
   font-weight: 700;
-  color: var(--gold-light);
+  color: var(--primary-crimson);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 14px;
   padding: 8px 28px;
   margin-bottom: 20px;
-  background: rgba(212, 175, 55, 0.08);
-  border: 1.5px solid rgba(212, 175, 55, 0.35);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1.5px solid rgba(212, 175, 55, 0.45);
   border-radius: 40px;
-  box-shadow: 0 0 25px rgba(212, 175, 55, 0.2);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.18);
 }
 
 .footer-heart {
   font-size: 1.6rem;
-  animation: pulseBeat 1.8s infinite ease-in-out;
+  display: inline-block;
+  animation: pulseHeart 1.8s infinite ease-in-out;
 }
 
 .footer-title {
   font-family: var(--font-script);
   font-size: clamp(3.2rem, 7vw, 4.5rem);
-  background: var(--gold-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--primary-crimson);
   margin-bottom: 10px;
   line-height: 1.15;
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+  text-shadow: 2px 3px 0 rgba(212, 175, 55, 0.25);
+}
+
+.footer-title .footer-ampersand {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.72em;
+  margin: 0 0.3em;
+  color: var(--gold-dark);
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .footer-bengali-title {
   font-family: var(--font-serif);
   font-size: 1.15rem;
-  color: var(--gold-light);
+  color: var(--sindoor-red);
   letter-spacing: 2.5px;
   margin-bottom: 14px;
-  text-shadow: 0 0 12px rgba(212, 175, 55, 0.35);
 }
 
 .footer-date {
   font-size: 0.95rem;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--rose-gold);
+  color: var(--gold-dark);
   margin-bottom: 24px;
   font-weight: 600;
 }
@@ -2773,7 +2447,7 @@ body.unveil-opened .reveal {
   font-family: var(--font-serif);
   font-style: italic;
   font-size: 1.12rem;
-  color: #F1E2DA;
+  color: var(--text-muted);
   max-width: 640px;
   margin: 0 auto 36px auto;
   line-height: 1.8;
@@ -2782,28 +2456,24 @@ body.unveil-opened .reveal {
 }
 
 .footer-copy {
-  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  border-top: 1px solid rgba(212, 175, 55, 0.35);
   padding-top: 26px;
   max-width: 600px;
   margin: 0 auto;
   font-size: 0.95rem;
-  color: #D6BCB4;
+  color: var(--text-muted);
 }
 
 .footer-copy strong {
-  color: var(--gold-light);
+  color: var(--primary-crimson);
 }
 
 .tiny-credit {
   font-size: 0.8rem;
-  color: rgba(214, 188, 180, 0.7);
   margin-top: 8px;
 }
 
-
-/* ==========================================================================
-   FOOTER WALKING COUPLE STAGE -> CONVERTS TO #SRIARI AT BOTTOM
-   ========================================================================== */
+/* Footer Walking Couple Stage */
 .footer-couple-stage {
   position: relative;
   width: 100%;
@@ -2829,7 +2499,7 @@ body.unveil-opened .reveal {
   letter-spacing: 0.5px;
   white-space: nowrap;
   user-select: none;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 4px 14px rgba(122, 12, 22, 0.2);
   transition: opacity 0.15s ease;
   will-change: left, right, opacity, transform;
 }
@@ -2869,7 +2539,6 @@ body.unveil-opened .reveal {
   pointer-events: none;
 }
 
-/* Merged #SRIARI badge when they meet at the bottom of the page */
 .footer-couple-merged {
   position: absolute;
   left: 50%;
@@ -2879,7 +2548,7 @@ body.unveil-opened .reveal {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--font-royal, 'Cinzel Decorative', serif);
+  font-family: var(--font-royal, 'Cinzel', serif);
   font-size: 1.25rem;
   font-weight: 900;
   letter-spacing: 2.5px;
@@ -2890,7 +2559,7 @@ body.unveil-opened .reveal {
   border-radius: 28px;
   border: 2px solid #FFFDF9;
   white-space: nowrap;
-  box-shadow: 0 0 32px rgba(212, 175, 55, 0.95), 0 6px 22px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 24px rgba(212, 175, 55, 0.6), 0 6px 18px rgba(122, 12, 22, 0.15);
   cursor: pointer;
   pointer-events: none;
   transition: opacity 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -2922,240 +2591,959 @@ body.unveil-opened .reveal {
   100% { background-position: 0% 50%; }
 }
 
-@media (max-width: 600px) {
-  .footer-section {
-    padding: 60px 16px 45px 16px;
-  }
-  .footer-title {
-    font-size: 2.7rem;
-  }
-  .footer-monogram {
-    font-size: 1.7rem;
-    padding: 6px 20px;
-  }
-  .footer-couple-stage {
-    max-width: 340px;
-    height: 48px;
-    margin: 18px auto 22px auto;
-  }
-  .footer-couple-walker {
-    padding: 4px 10px;
-    font-size: 0.82rem;
-  }
-  .walker-avatar {
-    font-size: 1.05rem;
-  }
-  .walker-name {
-    font-size: 0.84rem;
-  }
-  .footer-couple-merged {
-    font-size: 1rem;
-    padding: 6px 20px;
-    letter-spacing: 1.8px;
-  }
-}
-
 
 /* ==========================================================================
-   DARK MODE SUPPORT (SYSTEM & MOBILE PREFERS-COLOR-SCHEME)
+   COMPREHENSIVE RESPONSIVE DESIGN (ALL MOBILES & TABLETS)
+   Ensures perfect rendering & zero font overlapping across all phone sizes
+   (iPhone SE/8, iPhone 12/13/14/15/16 Pro Max, Samsung Galaxy, Pixel, etc.)
    ========================================================================== */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-champagne: #120305;
-    --bg-card: rgba(36, 7, 12, 0.94);
-    --text-dark: #FFF5EE;
-    --text-muted: #D1B8B3;
-    --text-gold: #F5D36B;
-    --glass-border: rgba(212, 175, 55, 0.45);
-    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.6);
-    --shadow-hover: 0 20px 45px rgba(0, 0, 0, 0.85);
+
+@media (max-width: 768px) {
+  /* Global Mobile Padding & Overflow Protection */
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
   }
 
-  body {
-    background-color: var(--bg-champagne);
-    color: var(--text-dark);
+  .section {
+    padding: 48px 16px;
   }
 
-  /* Date & Venue Pill */
+  .section-container {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 4px;
+    box-sizing: border-box;
+  }
+
+  .section-header {
+    margin-bottom: 28px;
+    padding: 0 6px;
+  }
+
+  .section-title {
+    font-size: clamp(1.4rem, 5.2vw, 2.2rem);
+    line-height: 1.3;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .section-desc {
+    font-size: clamp(0.85rem, 2.8vw, 0.96rem);
+    line-height: 1.65;
+    padding: 0 4px;
+  }
+
+  .title-ornament {
+    font-size: 1.05rem;
+    margin: 6px 0 10px;
+  }
+
+  /* Floating Controls (Repositioned to bottom-right to NEVER overlap headers!) */
+  .floating-controls {
+    top: auto;
+    bottom: max(18px, env(safe-area-inset-bottom));
+    right: 12px;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 1050;
+  }
+
+  .control-btn {
+    width: 40px;
+    height: 40px;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.28), 0 0 15px rgba(212, 175, 55, 0.4);
+  }
+
+  .control-btn .btn-icon {
+    font-size: 1.15rem;
+  }
+
+  /* Unveil Overlay Responsive Fitting */
+  .avatar-unveil-container {
+    padding: max(14px, env(safe-area-inset-top)) 10px max(14px, env(safe-area-inset-bottom)) 10px;
+    max-height: 100dvh;
+    justify-content: space-evenly;
+    box-sizing: border-box;
+  }
+
+  .unveil-header {
+    margin-bottom: 6px;
+    padding: 0 6px;
+  }
+
+  .shubho-symbol {
+    font-size: clamp(1.15rem, 4vw, 1.4rem);
+    letter-spacing: 2px;
+    margin-bottom: 2px;
+    line-height: 1.35;
+  }
+
+  .sanskrit-mantra {
+    font-size: clamp(0.76rem, 2.7vw, 0.88rem);
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+    line-height: 1.35;
+  }
+
+  .unveil-title {
+    font-size: clamp(1.85rem, 6.8vw, 2.7rem);
+    line-height: 1.15;
+    margin-bottom: 4px;
+    word-break: keep-all;
+  }
+
+  .unveil-title span {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.72em;
+    margin: 0 0.25em;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .unveil-tagline {
+    font-size: clamp(0.68rem, 2.4vw, 0.82rem);
+    letter-spacing: 0.8px;
+    margin-top: 2px;
+    line-height: 1.35;
+  }
+
+  .unveil-instruction-badge {
+    padding: 6px 12px;
+    font-size: clamp(0.68rem, 2.4vw, 0.8rem);
+    margin-top: 6px;
+    line-height: 1.35;
+    max-width: min(92vw, 420px);
+  }
+
+  .avatar-stage {
+    min-height: 175px;
+    margin: 6px 0 8px 0;
+    width: 100%;
+    max-width: 480px;
+    padding: 6px 2px;
+    gap: 4px;
+  }
+
+  .avatar-character-card {
+    width: clamp(92px, 28vw, 115px);
+    flex-shrink: 0;
+  }
+
+  .avatar-circle-wrapper {
+    width: clamp(72px, 21vw, 86px);
+    height: clamp(72px, 21vw, 86px);
+  }
+
+  .avatar-img-frame {
+    width: clamp(62px, 18vw, 74px);
+    height: clamp(62px, 18vw, 74px);
+  }
+
+  .avatar-role-icon {
+    width: 22px;
+    height: 22px;
+    font-size: 0.8rem;
+    bottom: 0;
+    right: 0;
+  }
+
+  .avatar-bubble {
+    font-size: clamp(0.62rem, 2vw, 0.72rem);
+    padding: 3px 6px;
+    margin-bottom: 5px;
+    /* stay within the card so bubbles don't collide when the couple meet */
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.25;
+  }
+
+  .avatar-name {
+    font-size: clamp(0.92rem, 3.2vw, 1.15rem);
+    letter-spacing: 0.5px;
+  }
+
+  .avatar-title-badge {
+    font-size: 0.65rem;
+    letter-spacing: 1.2px;
+  }
+
+  .avatar-action-pill {
+    font-size: clamp(0.58rem, 2vw, 0.68rem);
+    padding: 2.5px 7px;
+    white-space: nowrap;
+  }
+
+  .stage-path {
+    height: 48px;
+    margin: 0 4px;
+    flex: 1;
+    min-width: 40px;
+  }
+
+  .mandap-heart-glow {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    gap: 2px;
+  }
+
+  .mandap-rings {
+    font-size: 0.95rem;
+    line-height: 1;
+  }
+
+  .mandap-sub {
+    font-size: 0.5rem;
+    letter-spacing: 0.2px;
+    line-height: 1;
+  }
+
+  .mandap-altar-label {
+    font-size: 0.58rem;
+    margin-top: 3px;
+    white-space: nowrap;
+  }
+
+  .path-flower-dot {
+    font-size: 0.78rem;
+  }
+
+  /* The walker crosses the mandap on phones; fade it so the labels don't show through */
+  .path-center-altar {
+    transition: opacity 0.4s ease;
+  }
+
+  .stage-path.illuminated .path-center-altar {
+    opacity: 0;
+  }
+
+  /* Path is too short on phones for five dots; keep just the two end flowers */
+  .path-flower-dot:nth-child(2),
+  .path-flower-dot:nth-child(3),
+  .path-flower-dot:nth-child(4) {
+    display: none;
+  }
+
+  .together-celebration-card {
+    width: min(92vw, 380px);
+    padding: 22px 16px;
+    box-sizing: border-box;
+  }
+
+  .celebration-title {
+    font-size: clamp(1.8rem, 6vw, 2.6rem);
+  }
+
+  .celebration-subtitle {
+    font-size: clamp(1.2rem, 4.2vw, 1.6rem);
+    margin: 4px 0 8px;
+  }
+
+  .celebration-welcome {
+    font-size: clamp(0.82rem, 2.7vw, 0.95rem);
+    line-height: 1.45;
+  }
+
+  .unveil-bottom-hint {
+    margin-top: 6px;
+    gap: 4px;
+  }
+
+  .scroll-mouse-icon {
+    width: 18px;
+    height: 26px;
+  }
+
+  .hint-text {
+    font-size: 0.72rem;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    padding-top: 50px;
+  }
+
+  .om-swastik {
+    font-size: clamp(0.95rem, 3.5vw, 1.25rem);
+    line-height: 1.4;
+  }
+
+  .subho-bibaho-badge {
+    font-size: clamp(0.88rem, 3vw, 1.05rem);
+    line-height: 1.4;
+  }
+
+  .intro-tag {
+    font-size: clamp(0.68rem, 2.4vw, 0.8rem);
+    letter-spacing: 1px;
+    text-wrap: balance;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(0.85rem, 2.8vw, 0.95rem);
+    padding: 0 8px;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  .couple-names-wrapper {
+    gap: clamp(6px, 2.2vw, 14px);
+    margin-bottom: 18px;
+    flex-wrap: nowrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .bride-name, .groom-name {
+    font-size: clamp(2rem, 8.5vw, 3.6rem);
+    line-height: 1.15;
+    white-space: nowrap;
+    word-break: keep-all;
+  }
+
+  .heart-connector {
+    flex-shrink: 0;
+  }
+
+  .heart-pulse {
+    font-size: clamp(1.2rem, 4.2vw, 1.6rem);
+  }
+
+  .ampersand {
+    font-size: clamp(0.72rem, 2.5vw, 0.95rem);
+    letter-spacing: 1.2px;
+  }
+
+  .hero-couple-portrait-wrapper {
+    /* badge hangs 14px below the frame, so leave room before the date pill */
+    margin: 4px 0 36px;
+  }
+
+  .portrait-filigree-frame {
+    width: clamp(190px, 58vw, 230px);
+    height: clamp(190px, 58vw, 230px);
+  }
+
+  .filigree-badge-bottom span {
+    font-size: clamp(0.68rem, 2.4vw, 0.78rem);
+    white-space: nowrap;
+  }
+
+  /* Date & Venue Pill on Mobile */
   .date-venue-pill {
-    background: rgba(35, 7, 12, 0.95);
-    border-color: var(--gold-primary);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    flex-direction: column;
+    padding: 14px 16px;
+    border-radius: 20px;
+    gap: 8px;
+    width: 100%;
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+  }
+
+  .pill-divider {
+    display: none;
+  }
+
+  .pill-item {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
   }
 
   .pill-text {
-    color: #FFF5EE;
+    font-size: clamp(0.82rem, 2.7vw, 0.88rem);
+    word-break: break-word;
   }
 
-  /* Meet Bride & Groom Cards */
+  .hero-cta-group {
+    gap: 10px;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto 20px;
+  }
+
+  .btn {
+    padding: 11px 16px;
+    font-size: 0.88rem;
+  }
+
+  /* Meet Couple Cards */
+  .couple-side-by-side-wrapper {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+  }
+
   .couple-portrait-card {
-    background: rgba(32, 6, 10, 0.95);
-    border-color: rgba(212, 175, 55, 0.4);
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.7);
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 380px !important;
+    padding: 24px 18px;
+    box-sizing: border-box;
+  }
+
+  .bride-card { order: 1; }
+  .couple-center-divider {
+    order: 2;
+    margin: 10px auto;
+    max-width: min(90vw, 260px);
+  }
+  .groom-card { order: 3; }
+
+  .portrait-photo-frame {
+    width: clamp(160px, 48vw, 185px);
+    height: clamp(160px, 48vw, 185px);
+    margin-bottom: 16px;
+  }
+
+  .portrait-role-badge {
+    font-size: clamp(0.72rem, 2.6vw, 0.82rem);
+    padding: 4px 12px;
+    white-space: nowrap;
+  }
+
+  .portrait-name {
+    font-size: clamp(1.4rem, 5vw, 1.8rem);
   }
 
   .portrait-bio {
-    color: #E2CECB;
+    font-size: clamp(0.85rem, 2.8vw, 0.94rem);
+    line-height: 1.65;
+  }
+
+  .cute-tags {
+    gap: 6px;
   }
 
   .cute-tag {
-    background: rgba(212, 175, 55, 0.12);
-    color: #F9E8A2;
-    border-color: rgba(212, 175, 55, 0.35);
+    font-size: clamp(0.7rem, 2.4vw, 0.78rem);
+    padding: 4px 9px;
+  }
+
+  .center-heart-ring {
+    width: 54px;
+    height: 54px;
+    margin-bottom: 8px;
+  }
+
+  .center-heart-icon {
+    font-size: 1.5rem;
+  }
+
+  .center-bengali-symbol {
+    font-size: 1.15rem;
+    line-height: 1.35;
+  }
+
+  .center-quote {
+    font-size: 0.88rem;
+    line-height: 1.55;
   }
 
   /* Rituals Section */
-  .rituals-section {
-    background: #100204;
+  .rituals-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    max-width: 420px;
+    margin: 0 auto;
   }
 
   .ritual-card {
-    background: rgba(32, 6, 10, 0.94);
-    border-color: rgba(212, 175, 55, 0.35);
+    padding: 22px 18px;
+    box-sizing: border-box;
   }
 
   .ritual-title {
-    color: #F9E8A2;
+    font-size: clamp(1.15rem, 4.2vw, 1.35rem);
+    word-break: break-word;
+  }
+
+  .ritual-bengali-name {
+    font-size: 0.92rem;
+    line-height: 1.35;
   }
 
   .ritual-desc {
-    color: #D6BCB4;
+    font-size: 0.88rem;
+    line-height: 1.6;
   }
 
-  /* Countdown Section in Dark Mode */
-  .countdown-section {
-    background: linear-gradient(135deg, #180205 0%, #350409 50%, #1A0205 100%) !important;
+  /* Timer Grid (FLUID SINGLE-ROW LAYOUT - NEVER WRAPS OR OVERLAPS!) */
+  .timer-grid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap !important;
+    gap: clamp(3px, 1.6vw, 10px);
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto 26px auto;
   }
 
-  .countdown-card {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1.5px solid rgba(212, 175, 55, 0.4);
-    border-radius: 24px;
-    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.7), 0 0 30px rgba(212, 175, 55, 0.2);
-  }
-
-  .countdown-card .section-title {
-    color: #FFFDF9 !important;
-    text-shadow: 0 0 20px rgba(212, 175, 55, 0.6), 0 2px 6px rgba(0, 0, 0, 0.9) !important;
-  }
-
-  .countdown-subtitle {
-    color: #FAD4CD !important;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+  .timer-box {
+    flex-shrink: 0;
   }
 
   .timer-circle {
-    background: rgba(14, 2, 4, 0.88) !important;
-    border: 2px solid #F5D36B !important;
-    box-shadow: 0 0 22px rgba(245, 211, 107, 0.45), inset 0 0 12px rgba(212, 175, 55, 0.25) !important;
+    width: clamp(52px, 14.8vw, 68px);
+    height: clamp(52px, 14.8vw, 68px);
+    border-radius: 50%;
   }
 
   .timer-number {
-    color: #FFECA8 !important;
-    -webkit-text-fill-color: #FFECA8 !important;
-    background: none !important;
-    text-shadow: 0 0 16px rgba(255, 236, 168, 0.9), 0 2px 6px rgba(0, 0, 0, 0.9) !important;
-    filter: none !important;
+    font-size: clamp(1.15rem, 4vw, 1.55rem);
+    line-height: 1;
   }
 
   .timer-label {
-    color: #F9E8A2 !important;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9) !important;
+    font-size: clamp(0.54rem, 1.9vw, 0.68rem);
+    letter-spacing: clamp(0.5px, 0.2vw, 1px);
+    margin-top: 4px;
   }
 
   .timer-colon {
-    color: #F5D36B !important;
-    text-shadow: 0 0 14px rgba(245, 211, 107, 0.6) !important;
+    font-size: clamp(1rem, 3.2vw, 1.45rem);
+    margin-top: -12px;
+    flex-shrink: 0;
   }
 
-  .google-cal-btn {
-    background: var(--gold-gradient) !important;
-    color: #35040A !important;
-    font-weight: 700 !important;
-    box-shadow: 0 6px 25px rgba(212, 175, 55, 0.5) !important;
+  .countdown-card {
+    padding: 32px 14px;
+    box-sizing: border-box;
   }
 
-  .ical-btn {
-    background: rgba(255, 255, 255, 0.15) !important;
-    border-color: #F5D36B !important;
-    color: #FFFDF9 !important;
+  .countdown-subtitle {
+    font-size: clamp(0.85rem, 2.8vw, 0.98rem);
   }
 
-  /* Venue Section */
-  .venue-section {
-    background: #140306;
+  .calendar-actions {
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    gap: 10px;
   }
 
+  .calendar-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Venue Showcase */
   .venue-showcase-card {
-    background: rgba(32, 6, 10, 0.95);
-    border-color: rgba(212, 175, 55, 0.35);
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .venue-image-wrapper {
+    flex: none;
+    height: 240px;
+    min-height: 0;
+  }
+
+  .venue-details-content {
+    flex: none;
+    padding: 22px 16px;
+    box-sizing: border-box;
   }
 
   .venue-name {
-    color: #F9E8A2;
+    font-size: clamp(1.2rem, 4.2vw, 1.45rem);
+    word-break: break-word;
   }
 
   .venue-address {
-    color: #D6BCB4;
+    font-size: clamp(0.85rem, 2.8vw, 0.92rem);
+    word-break: break-word;
+    line-height: 1.6;
   }
 
   .perk-item strong {
-    color: #FFFDF9;
+    font-size: 0.92rem;
   }
 
   .perk-item p {
-    color: #D6BCB4;
+    font-size: 0.84rem;
+    line-height: 1.5;
   }
 
-  /* Blessings & RSVP Section */
-  .blessings-section {
-    background: radial-gradient(circle at 50% 50%, #160407 0%, #0E0204 100%);
+  .venue-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .venue-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Blessings & RSVP Form (Zero overflow on small phones) */
+  .blessings-interactive-layout {
+    flex-direction: column;
+    width: 100%;
+    gap: 24px;
   }
 
   .blessing-form-card {
-    background: rgba(32, 6, 10, 0.95);
-    border-color: rgba(212, 175, 55, 0.35);
-    color: #FFFDF9;
+    min-width: 0 !important;
+    width: 100% !important;
+    padding: 22px 16px;
+    box-sizing: border-box;
   }
 
-  .form-group label {
-    color: #F9E8A2;
+  .blessing-wall-container {
+    min-width: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  .form-title {
+    font-size: clamp(1.25rem, 4.4vw, 1.45rem);
   }
 
   .form-group input,
   .form-group select,
   .form-group textarea {
-    background: rgba(16, 2, 4, 0.9);
-    border-color: rgba(212, 175, 55, 0.4);
-    color: #FFFDF9;
+    font-size: 16px !important; /* Prevents auto-zoom on iOS Safari */
+    padding: 11px 14px;
+    box-sizing: border-box;
+  }
+
+  .form-group textarea {
+    min-height: 132px; /* fits the 4-line placeholder at 16px */
+  }
+
+  .sticker-selector {
+    gap: 8px;
   }
 
   .sticker-btn {
-    background: rgba(25, 4, 7, 0.85);
-    color: #FFFDF9;
-    border-color: rgba(212, 175, 55, 0.35);
-  }
-
-  .sticker-btn.active {
-    background: var(--gold-gradient);
-    color: #35040A;
-    font-weight: 700;
+    font-size: clamp(0.72rem, 2.5vw, 0.78rem);
+    padding: 8px 12px;
+    min-height: 36px;
+    white-space: normal;
+    text-align: center;
   }
 
   .wall-title {
-    color: #F9E8A2;
+    font-size: clamp(1.2rem, 4.2vw, 1.45rem);
   }
 
-  .blessing-card {
-    background: rgba(30, 4, 7, 0.92);
-    border-color: rgba(212, 175, 55, 0.35);
+  .wall-count {
+    font-size: 0.74rem;
+    padding: 3px 10px;
   }
 
-  .blessing-card-msg {
-    color: #E6D0CB;
+  .blessing-wall-item {
+    padding: 16px 14px;
+    box-sizing: border-box;
   }
 
-  .blessing-card-author {
-    color: #FFFDF9;
+  .blessing-text {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+  }
+
+  /* Polaroid Cards & Lightbox */
+  .polaroid-grid {
+    grid-template-columns: 1fr;
+    max-width: 360px;
+    margin: 0 auto;
+    gap: 22px;
+  }
+
+  .polaroid-caption {
+    gap: 8px;
+  }
+
+  .polaroid-caption p {
+    font-size: clamp(1.05rem, 3.8vw, 1.25rem);
+    flex: 1;
+    min-width: 0;
+    word-break: break-word;
+  }
+
+  .love-reaction-btn {
+    font-size: 0.8rem;
+    padding: 7px 12px;
+    min-height: 36px;
+    flex-shrink: 0;
+  }
+
+  .polaroid-tilt-1 { transform: rotate(-1.2deg); }
+  .polaroid-tilt-2 { transform: rotate(1.2deg); }
+  .polaroid-tilt-3 { transform: rotate(-1deg); }
+  .polaroid-tilt-4 { transform: rotate(1deg); }
+
+  .lightbox-content {
+    max-width: 95vw;
+    max-height: 88vh;
+  }
+
+  .lightbox-close-btn {
+    top: -50px;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    font-size: 1.15rem;
+  }
+
+  .lightbox-caption {
+    font-size: clamp(1.15rem, 4.2vw, 1.45rem);
+    margin-top: 8px;
+    padding: 0 10px;
+  }
+
+  /* Royal Footer on Mobile */
+  .footer-section {
+    padding: 55px 14px max(85px, calc(env(safe-area-inset-bottom) + 75px)) 14px;
+    box-sizing: border-box;
+  }
+
+  .footer-monogram {
+    font-size: clamp(1.35rem, 4.8vw, 1.8rem);
+    padding: 6px 18px;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .footer-heart {
+    font-size: 1.2rem;
+  }
+
+  .footer-couple-stage {
+    width: 100%;
+    max-width: min(340px, 92vw);
+    height: 48px;
+    margin: 16px auto 20px auto;
+  }
+
+  .footer-couple-walker {
+    padding: 4px 10px;
+    font-size: clamp(0.74rem, 2.5vw, 0.82rem);
+    gap: 5px;
+  }
+
+  .walker-avatar {
+    font-size: 1.05rem;
+  }
+
+  .walker-name {
+    font-size: clamp(0.76rem, 2.6vw, 0.84rem);
+    letter-spacing: 0.5px;
+  }
+
+  .footer-couple-merged {
+    font-size: clamp(0.92rem, 3.2vw, 1.05rem);
+    padding: 6px 18px;
+    letter-spacing: 1.5px;
+  }
+
+  .footer-title {
+    font-size: clamp(2rem, 7.5vw, 2.8rem);
+    line-height: 1.2;
+    margin-bottom: 10px;
+    word-break: keep-all;
+  }
+
+  .footer-title .footer-ampersand {
+    font-size: 0.72em;
+    margin: 0 0.25em;
+  }
+
+  .footer-bengali-title {
+    font-size: clamp(0.9rem, 3.4vw, 1.15rem);
+    letter-spacing: clamp(1px, 0.4vw, 2.2px);
+    margin-bottom: 10px;
+    line-height: 1.35;
+  }
+
+  .footer-date {
+    font-size: clamp(0.78rem, 2.7vw, 0.92rem);
+    letter-spacing: clamp(1.5px, 0.4vw, 2.8px);
+    margin-bottom: 18px;
+  }
+
+  .footer-quote {
+    font-size: clamp(0.88rem, 3.1vw, 1.02rem);
+    line-height: 1.7;
+    padding: 0 8px;
+    margin-bottom: 26px;
+  }
+
+  .footer-copy {
+    padding-top: 20px;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    max-width: min(480px, calc(100% - 50px));
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  .tiny-credit {
+    font-size: 0.76rem;
+  }
+}
+
+/* Specific Small Mobile Screens (Width <= 480px) */
+@media (max-width: 480px) {
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+    /* leave room for the fixed music/petal buttons (40px + 12px inset) on the right */
+    max-width: min(290px, calc(100vw - 116px));
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Tag wraps to two lines here, which strands the side dashes at the screen edges */
+  .golden-dash {
+    display: none;
+  }
+
+  .hero-cta-group .btn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+/* Specific Ultra-Compact Mobile Screens (Width <= 360px, e.g. iPhone SE 1st gen, Fold outer) */
+@media (max-width: 360px) {
+  .section {
+    padding: 40px 10px;
+  }
+
+  .avatar-character-card {
+    width: 90px;
+  }
+
+  .avatar-circle-wrapper {
+    width: 70px;
+    height: 70px;
+  }
+
+  .avatar-img-frame {
+    width: 60px;
+    height: 60px;
+  }
+
+  .avatar-bubble {
+    font-size: 0.6rem;
+    padding: 2px 5px;
+    max-width: 95px;
+  }
+
+  .avatar-name {
+    font-size: 0.88rem;
+  }
+
+  .avatar-action-pill {
+    font-size: 0.55rem;
+    padding: 2px 5px;
+  }
+
+  .mandap-heart-glow {
+    width: 38px;
+    height: 38px;
+  }
+
+  .mandap-rings {
+    font-size: 0.85rem;
+  }
+
+  .mandap-sub {
+    font-size: 0.44rem;
+  }
+
+  .mandap-altar-label {
+    font-size: 0.52rem;
+  }
+
+  .bride-name, .groom-name {
+    font-size: 1.95rem;
+  }
+
+  .timer-circle {
+    width: 48px;
+    height: 48px;
+  }
+
+  .timer-number {
+    font-size: 1.05rem;
+  }
+
+  .timer-label {
+    font-size: 0.5rem;
+  }
+
+  .timer-colon {
+    font-size: 0.95rem;
+    margin-top: -10px;
+  }
+
+  .footer-couple-stage {
+    max-width: 290px;
+    height: 44px;
+  }
+
+  .footer-couple-walker {
+    padding: 3px 7px;
+    font-size: 0.72rem;
+  }
+
+  .walker-avatar {
+    font-size: 0.95rem;
+  }
+
+  .walker-name {
+    font-size: 0.74rem;
+  }
+}
+
+
+/* Touch screens: no hover, so show tap hints up front and don't leave cards stuck "lifted" after a tap */
+@media (hover: none) {
+  .polaroid-zoom-hint {
+    opacity: 1;
+  }
+
+  .couple-portrait-card:hover,
+  .ritual-card:hover,
+  .blessing-wall-item:hover {
+    transform: none;
+  }
+}
+
+
+/* ==========================================================================
+   DARK MODE: KEEP THE LIGHT INVITATION
+   Chrome / Android WebView / Safari honour `color-scheme: only light` and won't
+   auto-darken. Some browsers (e.g. Samsung Internet) instead skip their forced
+   dark mode only when a site ships its own prefers-color-scheme styles, so we
+   ship one that simply re-asserts the light theme.
+   ========================================================================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: only light;
+  }
+
+  html,
+  body {
+    background-color: var(--bg-champagne);
+    color: var(--text-dark);
   }
 }
