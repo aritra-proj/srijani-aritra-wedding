@@ -1018,22 +1018,21 @@ button, input, select, textarea {
   margin: 10px 0 35px;
 }
 
+/* Rounded frame that takes the photo's own shape, so the whole photo shows (a circle cropped heads) */
 .portrait-filigree-frame {
   position: relative;
   width: 260px;
-  height: 260px;
-  border-radius: 50%;
+  border-radius: 28px;
   padding: 8px;
   background: var(--gold-gradient);
   box-shadow: 0 15px 40px rgba(122, 12, 22, 0.25), 0 0 30px rgba(212, 175, 55, 0.4);
 }
 
 .hero-together-photo {
+  display: block;
   width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: center 25%;
+  height: auto;
+  border-radius: 21px;
   border: 4px solid #FFFDF9;
 }
 
@@ -1261,29 +1260,23 @@ button, input, select, textarea {
   border-width: 2px 2px 0 0;
 }
 
+/* Rounded frame in the photo's own shape so the whole photo shows (the old circle cut it off) */
 .portrait-photo-frame {
   position: relative;
-  width: 190px;
-  height: 190px;
+  width: 230px;
   margin: 0 auto 20px;
-  border-radius: 50%;
+  border-radius: 24px;
   padding: 6px;
   background: var(--gold-gradient);
   box-shadow: 0 10px 25px rgba(122, 12, 22, 0.15);
 }
 
 .portrait-photo {
+  display: block;
   width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: center 20%;
+  height: auto;
+  border-radius: 18px;
   border: 3px solid #FFF;
-  transition: transform 0.5s ease;
-}
-
-.couple-portrait-card:hover .portrait-photo {
-  transform: scale(1.05);
 }
 
 .portrait-role-badge {
@@ -1525,6 +1518,7 @@ button, input, select, textarea {
   gap: 28px;
   max-width: 1080px;
   margin: 0 auto;
+  align-items: start; /* photos keep their own heights now */
 }
 
 .polaroid-card {
@@ -1564,19 +1558,19 @@ button, input, select, textarea {
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
 }
 
+/* Box follows the photo's own shape, so the whole photo shows (a fixed 250px height cut off heads) */
 .polaroid-img-box {
   position: relative;
   width: 100%;
-  height: 250px;
   overflow: hidden;
   border-radius: 4px;
   background: var(--bg-champagne);
 }
 
 .polaroid-img-box img {
+  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   transition: transform 0.5s ease;
 }
 
@@ -1804,16 +1798,17 @@ button, input, select, textarea {
   flex: 1.1;
   position: relative;
   min-height: 340px;
+  background: #F6EEE4; /* soft mat around the photo where its shape differs from the column */
 }
 
+/* Show the whole photo (fit inside the column rather than cropping it) */
 .venue-img {
   position: absolute;
   inset: 0;
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center 40%;
+  object-fit: contain;
 }
 
 .venue-overlay-badge {
@@ -2927,8 +2922,7 @@ body.unveil-opened .reveal {
   }
 
   .portrait-filigree-frame {
-    width: clamp(190px, 58vw, 230px);
-    height: clamp(190px, 58vw, 230px);
+    width: clamp(200px, 62vw, 250px);
   }
 
   .filigree-badge-bottom span {
@@ -3001,8 +2995,7 @@ body.unveil-opened .reveal {
   .groom-card { order: 3; }
 
   .portrait-photo-frame {
-    width: clamp(160px, 48vw, 185px);
-    height: clamp(160px, 48vw, 185px);
+    width: clamp(200px, 64vw, 250px);
     margin-bottom: 16px;
   }
 
@@ -3146,10 +3139,15 @@ body.unveil-opened .reveal {
     box-sizing: border-box;
   }
 
+  /* Single column on phones: the photo simply takes its own height, shown whole */
   .venue-image-wrapper {
     flex: none;
-    height: 240px;
     min-height: 0;
+  }
+
+  .venue-img {
+    position: static;
+    height: auto;
   }
 
   .venue-details-content {
